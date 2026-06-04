@@ -44,7 +44,7 @@ function Home() {
 
               <CategoryCard
                 title="LIFESTYLE"
-                image="https://images.unsplash.com/photo-1542291026-7eec264c27ff"
+                image="https://images.unsplash.com/photo-1552346154-21d32810aba3"
               />
 
             </div>
