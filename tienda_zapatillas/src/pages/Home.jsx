@@ -26,7 +26,7 @@ function Home() {
 
               <CategoryCard
                 title="RUNNING"
-                image="https://images.unsplash.com/photo-1552346154-21d32810aba3"
+                image="https://cdn.runrepeat.com/storage/gallery/buying_guide_primary/269/269-best-daily-running-shoes-15820218-1440.jpg"
               />
 
             </div>
