@@ -141,11 +141,11 @@ export const productos = [
       {
         colorName: "Negro-blanco",
         imagen: [
-          "/images/nike_dunk_low/Dunk-NBlanco-principal.webp",
-          "/images/nike_dunk_low/Dunk-NBlanco-2.webp",
-          "/images/nike_dunk_low/Dunk-NBlanco-3.webp",
-          "/images/nike_dunk_low/Dunk-NBlanco-4.webp",
-          "/images/nike_dunk_low/Dunk-NBlanco-5.webp",
+          "/images/nike_dunk_low/Dunk-low-NBlanco-principal.webp",
+          "/images/nike_dunk_low/Dunk-low-NBlanco-2.webp",
+          "/images/nike_dunk_low/Dunk-low-NBlanco-3.webp",
+          "/images/nike_dunk_low/Dunk-low-NBlanco-4.webp",
+          "/images/nike_dunk_low/Dunk-low-NBlanco-5.webp",
         ],
       },
       {
@@ -187,21 +187,21 @@ export const productos = [
       {
         colorName: "Blanco",
         imagen: [
-          "/images/nike_air_force_1/Air-force-principal.webp",
-          "/images/nike_air_force_1/Air-force-2.webp",
-          "/images/nike_air_force_1/Air-force-3.webp",
-          "/images/nike_air_force_1/Air-force-4.webp",
-          "/images/nike_air_force_1/Air-force-5.webp",
+          "/images/nike_air_force/Air-force-principal.webp",
+          "/images/nike_air_force/Air-force-2.webp",
+          "/images/nike_air_force/Air-force-3.webp",
+          "/images/nike_air_force/Air-force-4.webp",
+          "/images/nike_air_force/Air-force-5.webp",
         ],
       },
       {
         colorName: "Negro",
         imagen: [
-          "/images/nike_air_force_1/Air-force-negra-principal.webp",
-          "/images/nike_air_force_1/Air-force-negra-2.webp",
-          "/images/nike_air_force_1/Air-force-negra-3.webp",
-          "/images/nike_air_force_1/Air-force-negra-4.webp",
-          "/images/nike_air_force_1/Air-force-negra-5.webp",
+          "/images/nike_air_force/Air-force-negra-principal.webp",
+          "/images/nike_air_force/Air-force-negra-2.webp",
+          "/images/nike_air_force/Air-force-negra-3.webp",
+          "/images/nike_air_force/Air-force-negra-4.webp",
+          "/images/nike_air_force/Air-force-negra-5.webp",
         ],
       },
     ],
