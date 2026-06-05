@@ -1,9 +1,12 @@
 import React from 'react';
 import "../style/ProductCard.css";
+import { Link } from 'react-router-dom';
 
 function ProductCard({ producto }) {
-  // Desestructuramos las propiedades para usarlas fácil
   const { nombre, categoria, precio, imagen, descripcion, stock } = producto;
+
+  // Forzar que empiece con '/' para evitar errores de rutas relativas
+  const srcImagen = imagen.startsWith('/') ? imagen : `/${imagen}`;
 
   return (
     <div className="product-card" style={{
@@ -17,11 +20,11 @@ function ProductCard({ producto }) {
       boxShadow: "0 4px 15px rgba(0,0,0,0.3)"
     }}>
       
-      {/* CONTENEDOR DE LA IMAGEN: Forzamos una altura fija para que no se deforme */}
+      {/* CONTENEDOR DE LA IMAGEN FIJO Y SEGURO */}
       <div style={{ 
         width: "100%", 
         height: "220px", 
-        background: "#fff", 
+        background: "#ffffff", 
         display: "flex", 
         alignItems: "center", 
         justifyContent: "center",
@@ -29,13 +32,14 @@ function ProductCard({ producto }) {
         position: "relative"
       }}>
         <img 
-          src={imagen} 
+          src={srcImagen} 
           alt={nombre} 
           style={{ 
-            width: "100%", 
-            height: "100%", 
-            objectFit: "contain", // Hace que la zapatilla se encuadre entera sin cortarse
-            padding: "15px"
+            maxWidth: "100%", 
+            maxHeight: "100%", 
+            objectFit: "contain", 
+            padding: "15px",
+            display: "block"
           }} 
         />
         {stock === 0 && (
@@ -48,16 +52,16 @@ function ProductCard({ producto }) {
             padding: "4px 10px",
             fontSize: "12px",
             fontWeight: "bold",
-            borderRadius: "4px"
+            borderRadius: "4px",
+            zIndex: 2
           }}>
             Sin stock
           </span>
         )}
       </div>
 
-      {/* CUERPO DE LA TARJETA: Textos legibles en blanco y gris claro */}
+      {/* CUERPO DE LA TARJETA */}
       <div style={{ padding: "20px", display: "flex", flexDirection: "column", flexGrow: 1 }}>
-        
         <span style={{ 
           color: "#ff6600", 
           fontSize: "12px", 
@@ -70,7 +74,7 @@ function ProductCard({ producto }) {
         </span>
 
         <h3 style={{ 
-          color: "#ffffff", // Letra blanca impecable
+          color: "#ffffff", 
           fontSize: "18px", 
           fontWeight: "600", 
           margin: "0 0 10px 0",
@@ -80,17 +84,16 @@ function ProductCard({ producto }) {
         </h3>
 
         <p style={{ 
-          color: "#aaaaaa", // Gris claro para la descripción
+          color: "#aaaaaa", 
           fontSize: "14px", 
           lineHeight: "1.4",
           margin: "0 0 20px 0",
           flexGrow: 1,
           fontFamily: "sans-serif"
         }}>
-          {descripcion}
+          {descripcion.length > 65 ? `${descripcion.substring(0, 65)}...` : descripcion}
         </p>
 
-        {/* PRECIO Y BOTONES */}
         <div style={{ marginTop: "auto" }}>
           <div style={{ 
             color: "#ffffff", 
@@ -103,9 +106,22 @@ function ProductCard({ producto }) {
           </div>
 
           <div style={{ display: "flex", gap: "10px" }}>
-            <button className="btn btn-outline-light btn-sm" style={{ flex: 1, fontWeight: "500" }}>
+            <Link 
+              to={`/producto/${producto.id}`} 
+              className="btn btn-outline-light btn-sm" 
+              style={{ 
+                flex: 1, 
+                fontWeight: "500", 
+                textDecoration: "none", 
+                textAlign: "center",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center"
+              }}
+            >
               Ver detalle
-            </button>
+            </Link>
+            
             <button 
               className="btn btn-sm" 
               disabled={stock === 0}
@@ -121,7 +137,6 @@ function ProductCard({ producto }) {
             </button>
           </div>
         </div>
-
       </div>
     </div>
   );
