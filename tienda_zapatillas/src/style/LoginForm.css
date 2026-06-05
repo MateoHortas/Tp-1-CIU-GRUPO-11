@@ -1,0 +1,65 @@
+/* Estenedor principal de la tarjeta */
+.login-card {
+  max-width: 440px;
+}
+
+/* Ícono del encabezado con el candado/flecha */
+.login-header-icon {
+  width: 56px;
+  height: 56px;
+  background-color: #FF6B00;
+}
+
+/* Título principal de la tarjeta */
+.login-title {
+  color: #2B1B15;
+}
+
+/* Enlaces de "Olvidé mi contraseña" y "Crear cuenta" */
+.login-link {
+  color: #A0522D;
+  transition: color 0.2s ease-in-out;
+}
+
+.login-link:hover {
+  color: #FF6B00;
+  text-decoration: underline;
+}
+
+/* El input group que simula los bordes limpios */
+.login-input-group .input-group-text {
+  cursor: pointer;
+}
+
+/* Botón principal de inicio de sesión */
+.login-btn-submit {
+  background-color: #FF6B00;
+  transition: opacity 0.2s ease;
+}
+
+.btn-login-main:hover {
+  background-color: #ffb74d; /* Naranja suave/pastel */
+  border-color: #ffb74d;
+  color: white; /* Asegura que el texto siga siendo blanco */
+}
+
+.login-btn-submit:hover {
+  opacity: 0.9;
+}
+
+/* Texto del divisor "O continúa con" */
+.login-divider-text {
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+}
+
+.border-naranja-personalizado {
+  border: 1px solid #ff6b00;
+}
+/* Cuando el checkbox está marcado (Checked) */
+.form-check-input:checked {
+  background-color: #ff6b00 ;
+  border-color: #ff6b00 ;
+}
+
+
