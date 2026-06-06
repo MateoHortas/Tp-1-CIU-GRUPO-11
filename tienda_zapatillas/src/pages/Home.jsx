@@ -59,12 +59,12 @@ function Home() {
       <section className="py-5" style={{ background: "#121212" }}>
         <div className="container">
           <h2 className="section-title text-center text-white mb-4">
-            NUESTRO CATÁLOGO
+            PRODUCTOS DESTACADOS
           </h2>
           <div className="orange-line mb-5"></div>
           
           <div className="row g-4">
-            {productos.map((prod) => (
+            {productos.slice(0,4).map((prod) => (
               <div key={prod.id} className="col-12 col-md-6 col-lg-4 col-xl-3">
                 <ProductCard producto={prod} />
               </div>
