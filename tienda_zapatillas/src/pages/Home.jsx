@@ -55,33 +55,22 @@ function Home() {
 
       </section>
 
-      {/* Productos */}
-
-      <section className="featured-section">
-
+     {/* --- NUESTRO CATÁLOGO DE PRODUCTOS --- */}
+      <section className="py-5" style={{ background: "#121212" }}>
         <div className="container">
-
-          <h2 className="section-title">
-            PRODUCTOS DESTACADOS
+          <h2 className="section-title text-center text-white mb-4">
+            NUESTRO CATÁLOGO
           </h2>
-
           <div className="orange-line mb-5"></div>
-
+          
           <div className="row g-4">
-
-            {productos.slice(1, 5).map((productos) => (
-              <div
-                className="col-12 col-sm-6 col-lg-3"
-                key={productos.id}
-              >
-                <ProductCard product={productos} />
+            {productos.map((prod) => (
+              <div key={prod.id} className="col-12 col-md-6 col-lg-4 col-xl-3">
+                <ProductCard producto={prod} />
               </div>
             ))}
-
           </div>
-
         </div>
-
       </section>
 
       <Footer />
