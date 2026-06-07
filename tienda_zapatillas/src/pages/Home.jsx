@@ -12,20 +12,20 @@ function Home({ agregarAlCarrito, carrito }) {
   return (
     <>
       <Link
-  to="/carrito"
-  className="btn"
-  style={{
-    background: "#ff6600",
-    color: "white",
-    borderRadius: "25px",
-    padding: "10px 20px",
-    fontWeight: "600",
-    border: "none",
-  }}
->
-  🛒 Carrito
-  {cantidadTotal > 0 && ` (${cantidadTotal})`}
-</Link>
+        to="/carrito"
+        className="btn"
+        style={{
+          background: "#ff6600",
+          color: "white",
+          borderRadius: "25px",
+          padding: "10px 20px",
+          fontWeight: "600",
+          border: "none",
+        }}
+      >
+        🛒 Carrito
+        {cantidadTotal > 0 && ` (${cantidadTotal})`}
+      </Link>
       <div
         className="text-center py-2"
         style={{
