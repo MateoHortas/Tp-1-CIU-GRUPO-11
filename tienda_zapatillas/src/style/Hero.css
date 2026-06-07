@@ -14,7 +14,7 @@ body{
   background-position:center;
   display:flex;
   align-items:center;
-  background-image: url(../public/heroImage.jpeg);
+ 
 }
 
 .hero-overlay{
@@ -33,6 +33,7 @@ body{
   font-size:clamp(2.5rem, 8vw, 5rem);
   font-weight:800;
   line-height:1;
+  color: white;
 }
 
 .hero-subtitle{

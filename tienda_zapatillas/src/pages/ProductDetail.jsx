@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { productos } from '../data/data';
 
@@ -6,6 +6,7 @@ function ProductDetail() {
   const { id } = useParams();
   const producto = productos.find((p) => p.id === parseInt(id));
   const [talleSeleccionado, setTalleSeleccionado] = useState(null);
+  const [stock, setStock] = useState(producto?.stock || 0);
 
   if (!producto) {
     return (
@@ -18,7 +19,7 @@ function ProductDetail() {
     );
   }
 
-  const { nombre, precio, imagen, descripcion, stock, talles } = producto;
+  const { nombre, precio, imagen, descripcion, talles } = producto;
   const rutaLimpia = imagen.startsWith('/') ? imagen : `/${imagen}`;
   const srcImagenAbsoluta = `${window.location.origin}${rutaLimpia}`;
 
@@ -189,6 +190,7 @@ function ProductDetail() {
                 cursor: (stock === 0 || (talles && talles.length > 0 && !talleSeleccionado)) ? "not-allowed" : "pointer",
                 transition: "background 0.2s ease"
               }}
+              onClick={() => setStock(stock - 1)}
             >
               {stock === 0 ? "Sin stock" : "Agregar al carrito"}
             </button>

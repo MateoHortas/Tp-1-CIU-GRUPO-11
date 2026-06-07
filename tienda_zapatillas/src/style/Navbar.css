@@ -1,0 +1,234 @@
+/* --- VARIABLES DEL TEMA --- */
+:root {
+  /* Tema claro (default) */
+  --bg-navbar: #eef0f3;
+  --bg-sitio: #fff;
+  --text-main: #000000;
+  --accent: #ff6b00;
+  --toggler-invert: 0;
+  --toggler-border: rgba(0, 0, 0, 0.15);
+}
+
+/* Tema oscuro */
+.modo-oscuro-activo {
+  --bg-navbar: #16161a;
+  --bg-sitio: #0f0f12;
+  --text-main: #fff;
+  --toggler-invert: 1;
+  --toggler-border: rgba(255, 255, 255, 0.25);
+}
+
+/* --- ESTILOS BASE DEL SITIO --- */
+body,
+.modo-oscuro-activo {
+  background-color: var(--bg-sitio);
+  color: var(--text-main);
+  min-height: 100vh;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+h1,
+p,
+.modo-oscuro-activo h1,
+.modo-oscuro-activo p {
+  color: var(--text-main);
+  transition: color 0.3s ease;
+}
+
+/* --- NAVBAR --- */
+.navbar {
+  background-color: var(--bg-navbar);
+  transition: background-color 0.3s ease;
+  border-bottom: 1px solid var(--accent);
+}
+
+/* --- MARCA (LOGO Y TEXTO) --- */
+.brand-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.brand-logo {
+  width: 40px;
+  height: 40px;
+  margin-right: 12px;
+  object-fit: contain;
+  flex-shrink: 0;
+
+  /* Texto alt del logo */
+  color: var(--text-main);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-align: center;
+  display: inline-block;
+}
+
+.brand-text-container {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.brand-text-main,
+.brand-text-sub {
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.brand-text-main {
+  color: var(--text-main);
+  font-size: 1.4rem;
+  transition: color 0.3s ease;
+}
+
+.brand-text-sub {
+  color: var(--accent);
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+}
+
+/* --- MENÚ PRINCIPAL DE NAVEGACIÓN --- */
+.menu-principal .nav-link {
+  color: var(--text-main);
+  font-weight: 500;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  padding: 8px 12px;
+  position: relative;
+  transition:
+    color 0.3s ease,
+    transform 0.2s ease;
+}
+
+.menu-principal .nav-link:hover,
+.menu-principal .nav-link.active {
+  color: var(--accent) !important;
+}
+
+.menu-principal .nav-link:hover {
+  transform: translateY(-2px);
+}
+
+.menu-principal .nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 12px;
+  right: 12px;
+  height: 2px;
+  border-radius: 2px;
+  background-color: var(--accent);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.menu-principal .nav-link.active::after {
+  opacity: 1;
+}
+
+/* --- BOTONES DE ACCIÓN (TEMA Y CARRITO) --- */
+.navbar .btn-nav-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-nav-container .btn-nav-icono {
+  color: var(--text-main);
+  background-color: transparent;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  padding: 6px;
+  cursor: pointer;
+  position: relative;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.btn-nav-container .btn-nav-icono:hover,
+.btn-nav-container .boton-carrito.active {
+  color: var(--accent) !important;
+}
+
+/* --- ICONO DEL MENÚ HAMBURGUESA --- */
+.navbar-toggler-icon {
+  filter: invert(var(--toggler-invert));
+  transition: filter 0.3s ease;
+}
+
+/* --- INDICADOR DEL CARRITO --- */
+.numero-carrito {
+  background-color: var(--accent);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(35%, -35%);
+}
+
+/* --- ANIMACIÓN DEL CARRITO --- */
+.boton-carrito {
+  display: inline-block;
+}
+
+.animar-carrito {
+  animation: popCarrito 0.3s ease-out;
+}
+
+@keyframes popCarrito {
+  0% {
+    transform: scale(1); /* Tamaño original */
+  }
+  50% {
+    transform: scale(1.25); /* Se agranda un 25% */
+  }
+  100% {
+    transform: scale(1); /* Vuelve al tamaño original */
+  }
+}
+
+/* --- AJUSTES RESPONSIVE (TABLETS Y CELULARES) --- */
+@media (max-width: 991px) {
+  .btn-nav-container {
+    margin-top: 10px;
+    padding: 10px 0;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .menu-principal {
+    text-align: center;
+    gap: 10px;
+    padding: 10px 0;
+  }
+
+  .navbar-toggler {
+    border-color: var(--toggler-border) !important;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .navbar-toggler:focus,
+  .navbar-toggler:active {
+    outline: none;
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 3px var(--accent) !important;
+  }
+}

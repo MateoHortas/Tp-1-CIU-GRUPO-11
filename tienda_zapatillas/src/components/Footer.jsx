@@ -5,9 +5,11 @@ function Footer() {
     <>
       <section className="services-section">
 
+
         <div className="container">
 
           <div className="row text-center">
+
 
             <div className="col-md-4">
               <i className="bi bi-truck fs-2"></i>
@@ -16,9 +18,11 @@ function Footer() {
                 <b>ENVÍOS SEGUROS</b>
               </h6>
 
+
               <p>
                 A todo el país con seguimiento.
               </p>
+
             </div>
 
             <div className="col-md-4">
@@ -28,9 +32,11 @@ function Footer() {
                 <b>CAMBIOS GRATIS</b>
               </h6>
 
+
               <p>
                 Tenés 30 días para cambios.
               </p>
+
             </div>
 
             <div className="col-md-4">
@@ -39,6 +45,7 @@ function Footer() {
               <h6 className="mt-2">
                 <b>CALIDAD GARANTIZADA</b>
               </h6>
+
 
               <p>
                 Materiales premium.
@@ -65,9 +72,12 @@ function Footer() {
 
         </div>
 
+
       </footer>
     </>
   );
 }
 
+
 export default Footer;
+

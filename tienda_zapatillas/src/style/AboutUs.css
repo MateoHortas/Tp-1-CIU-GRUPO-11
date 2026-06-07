@@ -1,0 +1,50 @@
+
+.hero-section {
+  height: 60vh; 
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.hero-title {
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.hero-subtitle {
+  font-style: italic;
+  font-weight: 300;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+}
+
+.section-heading {
+  font-size: 2.5rem;
+  color: #111111;
+  letter-spacing: 0.5px;
+}
+
+
+.image-wrapper {
+  border: 12px solid #0f141c; 
+  transition: transform 0.3s ease;
+  background-color: #000; 
+}
+
+.image-wrapper:hover {
+  transform: scale(1.02); 
+}
+
+.nosotros-img {
+  object-fit: cover;
+  display: block;
+}
+
+
+.bg-dark .section-heading {
+  color: #ffffff !important;
+}
+
+.bg-dark .section-text {
+  color: #b0b3b8 !important;
+}
