@@ -6,7 +6,7 @@ import { TemaContext } from "../context/TemaContext";
 import { CarritoContext } from "../context/CarritoContext";
 import { LoginContext } from "../context/LoginContext"; // 🌟 Importamos tu nuevo contexto
 import { useAnimarCarrito } from "../hooks/useAnimarCarrito";
-//import logoTriatlon from "../assets/logo.png";
+import logoTriatlon from "../../public/logoTriatlon.png";
 
 import "../style/Navbar.css";
 
@@ -23,10 +23,8 @@ function Navigation() {
         <Navbar.Brand as={Link} to="/" className="brand-container">
           <img
             // --- AGREGAR LOGO ---
-            //src={logoTriatlon}
+            src={logoTriatlon}
             alt="Logo"
-            width="40"
-            height="40"
             className="brand-logo"
           />
           <div className="brand-text-container">
