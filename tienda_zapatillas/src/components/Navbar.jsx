@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 import { FiSun, FiMoon, FiShoppingCart } from "react-icons/fi";
@@ -16,10 +16,30 @@ function Navigation() {
 
   const animar = useAnimarCarrito(cantidadCarrito);
 
+  const [expandido, setExpandido] = useState(false);
+
+  const cerrarMenu = () => setExpandido(false);
+
+  const alternarTema = () => {
+    cambiarTema();
+    cerrarMenu();
+  };
+
   return (
-    <Navbar expand="lg" sticky="top" className="shadow-sm">
+    <Navbar
+      expand="lg"
+      sticky="top"
+      className="shadow-sm"
+      expanded={expandido}
+      onToggle={(abierto) => setExpandido(abierto)}
+    >
       <Container>
-        <Navbar.Brand as={Link} to="/" className="brand-container">
+        <Navbar.Brand
+          as={Link}
+          to="/"
+          className="brand-container"
+          onClick={cerrarMenu}
+        >
           <img
             // --- AGREGAR LOGO ---
             //src={logoTriatlon}
@@ -34,10 +54,26 @@ function Navigation() {
           </div>
         </Navbar.Brand>
 
+        <div className="carrito-flotante-container">
+          <Nav.Link
+            as={NavLink}
+            to="/carrito"
+            onClick={cerrarMenu}
+            className={`btn-nav-icono boton-carrito ${animar ? "animar-carrito" : ""}`}
+            aria-label="Carrito de compras"
+          >
+            <FiShoppingCart strokeWidth={1.8} />
+
+            {cantidadCarrito > 0 && (
+              <span className="numero-carrito">{cantidadCarrito}</span>
+            )}
+          </Nav.Link>
+        </div>
+
         <Navbar.Toggle aria-controls="menu-principal" />
 
         <Navbar.Collapse id="menu-principal">
-          <Nav className="menu-principal mx-auto">
+          <Nav className="menu-principal mx-auto" onClick={cerrarMenu}>
             <Nav.Link as={NavLink} to="/" end>
               Inicio
             </Nav.Link>
@@ -54,8 +90,8 @@ function Navigation() {
           <Nav className="btn-nav-container">
             <button
               className="btn-nav-icono"
-              aria-label="Modo oscuro"
-              onClick={cambiarTema}
+              aria-label={modoOscuro ? "Modo oscuro" : "Modo claro"}
+              onClick={alternarTema}
             >
               {modoOscuro ? (
                 <FiSun strokeWidth={1.8} />
@@ -63,19 +99,6 @@ function Navigation() {
                 <FiMoon strokeWidth={1.8} />
               )}
             </button>
-
-            <Nav.Link
-              as={NavLink}
-              to="/carrito"
-              className={`btn-nav-icono boton-carrito ${animar && "animar-carrito"}`}
-              aria-label="Carrito de compras"
-            >
-              <FiShoppingCart strokeWidth={1.8} />
-
-              {cantidadCarrito > 0 && (
-                <span className="numero-carrito">{cantidadCarrito}</span>
-              )}
-            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -4,8 +4,8 @@ import { TemaContext } from "./context/TemaContext";
 import { CarritoContext } from "./context/CarritoContext";
 
 import Navigation from "./components/Navbar";
-import Home from "./pages/Home"
-import ProductDetail from "./pages/ProductDetail"
+import Home from "./pages/Home";
+import ProductDetail from "./pages/ProductDetail";
 
 function App() {
   const [modoOscuro, setModoOscuro] = useState(false);
@@ -19,12 +19,15 @@ function App() {
   const agregarAlCarrito = (productoNuevo) => {
     setCarrito((carritoActual) => {
       const existe = carritoActual.find(
-        (producto) => producto.id === productoNuevo.id,
+        (producto) =>
+          producto.id === productoNuevo.id &&
+          producto.talleElegido === productoNuevo.talleElegido,
       );
 
       if (existe) {
         return carritoActual.map((producto) =>
-          producto.id === productoNuevo.id
+          producto.id === productoNuevo.id &&
+          producto.talleElegido === productoNuevo.talleElegido
             ? { ...producto, cantidad: producto.cantidad + 1 }
             : producto,
         );
@@ -46,10 +49,10 @@ function App() {
       >
         <div className={modoOscuro ? "modo-oscuro-activo" : ""}>
           <Navigation />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/producto/:id" element={<ProductDetail />} />
-            </Routes>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/producto/:id" element={<ProductDetail />} />
+          </Routes>
         </div>
       </CarritoContext.Provider>
     </TemaContext.Provider>
