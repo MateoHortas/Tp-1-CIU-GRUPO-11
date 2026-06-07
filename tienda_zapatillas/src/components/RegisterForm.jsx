@@ -6,6 +6,7 @@ import Alert from "react-bootstrap/Alert";
 import { FcGoogle } from "react-icons/fc";
 import { FaApple, FaEye, FaEyeSlash } from "react-icons/fa";
 import "../style/LoginForm.css"; // Reutilizamos los estilos base de colores y botones
+import { Link } from "react-router-dom";
 
 function RegisterForm() {
   const [usuarios, setUsuarios] = useState([]);
@@ -141,7 +142,7 @@ function RegisterForm() {
         <Card.Body>
           {/* Encabezado */}
           <div className="text-center mb-4">
-            <h2 className="fw-bold mb-1 login-title">Únete a TriaTlon</h2>
+            <h2 className="fw-bold mb-1 login-title">Únete a TRIATLON</h2>
             <p className="text-muted small px-3">
               Regístrate para obtener beneficios exclusivos y acceso anticipado.
             </p>
@@ -339,12 +340,12 @@ function RegisterForm() {
           {/* Enlace al Login */}
           <div className="text-center small text-muted">
             ¿Ya tienes una cuenta?{" "}
-            <a
-              href="#login"
+            <Link
+              to="/login"
               className="fw-bold text-decoration-none login-link"
             >
-              Iniciar Sesión
-            </a>
+              Iniciar sesion
+            </Link>
           </div>
         </Card.Body>
       </Card>

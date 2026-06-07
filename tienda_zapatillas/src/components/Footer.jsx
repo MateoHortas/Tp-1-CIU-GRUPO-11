@@ -4,8 +4,13 @@ function Footer() {
   return (
     <>
       <section className="services-section">
+
+
         <div className="container">
+
           <div className="row text-center">
+
+
             <div className="col-md-4">
               <i className="bi bi-truck fs-2"></i>
 
@@ -13,7 +18,11 @@ function Footer() {
                 <b>ENVÍOS SEGUROS</b>
               </h6>
 
-              <p>A todo el país con seguimiento.</p>
+
+              <p>
+                A todo el país con seguimiento.
+              </p>
+
             </div>
 
             <div className="col-md-4">
@@ -23,7 +32,11 @@ function Footer() {
                 <b>CAMBIOS GRATIS</b>
               </h6>
 
-              <p>Tenés 30 días para cambios.</p>
+
+              <p>
+                Tenés 30 días para cambios.
+              </p>
+
             </div>
 
             <div className="col-md-4">
@@ -33,21 +46,38 @@ function Footer() {
                 <b>CALIDAD GARANTIZADA</b>
               </h6>
 
-              <p>Materiales premium.</p>
+
+              <p>
+                Materiales premium.
+              </p>
             </div>
+
           </div>
+
         </div>
+
       </section>
 
       <footer className="footer-custom">
-        <div className="container d-flex justify-content-between">
-          <span>© 2026 TRIATLON CALZADOS.</span>
 
-          <span>TODOS LOS DERECHOS RESERVADOS.</span>
+        <div className="container d-flex justify-content-between">
+
+          <span>
+            © 2026 TRIATLON CALZADOS.
+          </span>
+
+          <span>
+            TODOS LOS DERECHOS RESERVADOS.
+          </span>
+
         </div>
+
+
       </footer>
     </>
   );
 }
 
+
 export default Footer;
+

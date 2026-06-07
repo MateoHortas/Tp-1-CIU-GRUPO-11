@@ -7,13 +7,16 @@ import {
   InputGroup,
   Alert,
 } from "react-bootstrap";
-import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { LoginContext } from "../context/LoginContext";
+import { useState, useEffect, useContext } from "react";
 import { FiMail, FiLock, FiEye, FiEyeOff, FiLogIn } from "react-icons/fi";
 import { FcGoogle } from "react-icons/fc";
 import { FaApple } from "react-icons/fa";
 import "../style/LoginForm.css";
 
 function LoginForm() {
+  const { login, usuario } = useContext(LoginContext);
   const [showPassword, setShowPassword] = useState(false);
   const [usuarios, setUsuarios] = useState([]);
   const [errors, setErrors] = useState({});
@@ -71,15 +74,22 @@ function LoginForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // 1. Control seguro: si ya está conectado, frena el re-ingreso
+    if (usuario && usuario.email) {
+      setLoginError("Ya tienes una sesión activa en este dispositivo.");
+      setTimeout(() => setLoginError(""), 4000);
+      return;
+    }
+
     if (!validarForm()) return;
 
-    // 1. TRAER LOS USUARIOS ACTUALIZADOS DEL LOCALSTORAGE EN ESTE PRE_INSTANTE
-    // Esto evita que dependamos de si el componente se renderizó o no antes.
+    // 2. Traemos usuarios de localStorage
     const usuariosFrescos = JSON.parse(localStorage.getItem("usuarios")) || [];
 
-    // 2. Buscar si el email existe usando la lista fresca y aplicando .trim() por seguridad
+    // 3. Buscamos si el email existe
     const usuarioEncontrado = usuariosFrescos.find(
       (u) =>
+        u.email &&
         u.email.toLowerCase().trim() === credentials.email.toLowerCase().trim(),
     );
 
@@ -89,16 +99,17 @@ function LoginForm() {
       return;
     }
 
-    // 3. Verificar si la contraseña coincide
+    // 4. Verificamos la contraseña
     if (usuarioEncontrado.password !== credentials.password) {
       setLoginError("Contraseña incorrecta.");
       setTimeout(() => setLoginError(""), 3000);
       return;
     }
 
-    // 4. Login Exitoso: Modificamos la lista fresca
+    // 5. Login Exitoso: Modificamos la lista
     const usuariosActualizados = usuariosFrescos.map((u) => {
       if (
+        u.email &&
         u.email.toLowerCase().trim() === credentials.email.toLowerCase().trim()
       ) {
         return { ...u, isLoggedIn: true };
@@ -106,14 +117,21 @@ function LoginForm() {
       return { ...u, isLoggedIn: false };
     });
 
-    // 5. Guardamos la nueva lista en localStorage y actualizamos el estado local
+    // 6. Guardamos
     localStorage.setItem("usuarios", JSON.stringify(usuariosActualizados));
-    setUsuarios(usuariosActualizados); // Esto mantiene el estado del componente al día
+    setUsuarios(usuariosActualizados);
+
+    // 7. Impactamos el Contexto Global de Autenticación
+    login({
+      email: usuarioEncontrado.email,
+      nombre: usuarioEncontrado.nombre || usuarioEncontrado.email.split("@")[0],
+      rol: usuarioEncontrado.rol || "user",
+    });
 
     setLoginOK(true);
     setTimeout(() => setLoginOK(false), 3000);
 
-    // Limpiar formulario
+    // Limpiamos campos
     setCredentials({ email: "", password: "", rememberMe: false });
     setErrors({});
   };
@@ -254,7 +272,7 @@ function LoginForm() {
                 variant="outline-secondary"
                 className="w-100 d-flex align-items-center justify-content-center gap-2 bg-transparent text-dark border-light-subtle py-2 small fw-semibold "
               >
-                <FaApple size={18} className="text-dark" /> Apple
+                <FaApple size={18} /> Apple
               </Button>
             </Col>
           </Row>
@@ -262,12 +280,12 @@ function LoginForm() {
           {/* Enlace de Registro */}
           <div className="text-center small text-muted">
             ¿No tienes una cuenta?{" "}
-            <a
-              href="#register"
+            <Link
+              to="/register"
               className="fw-bold text-decoration-none login-link"
             >
               Crear cuenta
-            </a>
+            </Link>
           </div>
         </Card.Body>
       </Card>
