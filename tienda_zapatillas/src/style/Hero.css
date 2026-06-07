@@ -14,7 +14,7 @@ body{
   background-position:center;
   display:flex;
   align-items:center;
- 
+  box-shadow: 0px 6px 15px #3f1a00;
 }
 
 .hero-overlay{

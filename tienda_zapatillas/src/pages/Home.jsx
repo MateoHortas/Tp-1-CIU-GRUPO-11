@@ -52,7 +52,7 @@ function Home({ agregarAlCarrito }) {
         </div>
       </section>
 
-      {/* --- NUESTRO CATÁLOGO DE PRODUCTOS --- */}
+      {/* --- PRODUCTOS DESTACADOS --- */}
       <section className="py-5" style={{ background: "#121212" }}>
         <div className="container">
           <h2 className="section-title text-center text-white mb-4">

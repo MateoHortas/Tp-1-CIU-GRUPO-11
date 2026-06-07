@@ -42,6 +42,8 @@ p,
   background-color: var(--bg-navbar);
   transition: background-color 0.3s ease;
   border-bottom: 1px solid var(--accent);
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
 }
 
 /* --- MARCA (LOGO Y TEXTO) --- */
@@ -53,8 +55,8 @@ p,
 }
 
 .brand-logo {
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   margin-right: 12px;
   object-fit: contain;
   flex-shrink: 0;
