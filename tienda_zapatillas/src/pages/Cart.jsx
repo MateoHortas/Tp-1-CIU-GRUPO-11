@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import "../style/cart.css";
 
 function Cart({
   carrito,
@@ -9,202 +10,121 @@ function Cart({
 }) {
   const total = carrito.reduce(
     (acum, producto) => acum + producto.precio * producto.cantidad,
-    0,
+    0
   );
 
   const unidadesTotales = carrito.reduce(
     (acum, producto) => acum + producto.cantidad,
-    0,
+    0
   );
 
   const productosDistintos = carrito.length;
 
   return (
-    <div
-      className="py-5"
-      style={{
-        background: "#121212",
-        minHeight: "100vh",
-        color: "white",
-      }}
-    >
-      {" "}
+    <div className="cart-dark py-5">
       <div className="container">
-        <Link
-          to="/"
-          className="btn mb-4"
-          style={{
-            border: "1px solid #ff6600",
-            color: "#ff6600",
-          }}
-        >
-          ← Seguir comprando{" "}
+
+        <Link to="/" className="btn btn-back mb-4">
+          ← Seguir comprando
         </Link>
 
         <h2 className="section-title text-center">TU CARRITO</h2>
-
-        <div className="orange-line mb-4"></div>
+        <div className="orange-line mb-5"></div>
 
         {compraRealizada && (
-          <div
-            className="alert text-center mb-4"
-            style={{
-              background: "#ff6600",
-              color: "white",
-              border: "none",
-              fontWeight: "600",
-            }}
-          >
+          <div className="success-box">
             ✅ ¡Gracias por tu compra! Tu pedido fue registrado correctamente.
           </div>
         )}
 
         {carrito.length === 0 ? (
-          <div
-            className="text-center p-5"
-            style={{
-              background: "#1e1e1e",
-              borderRadius: "10px",
-            }}
-          >
-            <h4>🛒 Tu carrito está vacío</h4>
+          <div className="empty-cart">
+            <h2>🛒 Tu carrito está vacío</h2>
+            <p>Todavía no agregaste productos.</p>
+
+            <Link to="/" className="btn btn-primary-custom mt-3">
+              Ver productos
+            </Link>
           </div>
         ) : (
           <>
             {carrito.map((producto) => (
-              <div
-                key={producto.id}
-                className="card mb-3"
-                style={{
-                  background: "#1e1e1e",
-                  border: "1px solid rgba(255,255,255,0.1)",
-                  color: "white",
-                }}
-              >
-                <div className="card-body">
-                  <div className="row align-items-center">
-                    <div className="col-md-3 text-center mb-3 mb-md-0">
-                      <img
-                        src={producto.imagen}
-                        alt={producto.nombre}
-                        className="img-fluid rounded"
-                        style={{
-                          maxHeight: "140px",
-                          objectFit: "contain",
-                        }}
-                      />
+              <div key={producto.id} className="cart-item mb-4">
+                <div className="row align-items-center">
+
+                  <div className="col-md-3 text-center mb-3 mb-md-0">
+                    <img
+                      src={producto.imagen}
+                      alt={producto.nombre}
+                      className="img-fluid rounded cart-img"
+                    />
+                  </div>
+
+                  <div className="col-md-9">
+
+                    <h3 className="product-title">
+                      {producto.nombre}
+                    </h3>
+
+                    <p>Precio unitario: ${producto.precio.toLocaleString("es-AR")}</p>
+
+                    <p>Cantidad: {producto.cantidad}</p>
+
+                    <div className="product-total">
+                      ${(producto.precio * producto.cantidad).toLocaleString("es-AR")}
                     </div>
 
-                    <div className="col-md-9">
-                      <h4
-                        className="card-title"
-                        style={{
-                          color: "#ff6600",
-                          fontWeight: "700",
-                        }}
+                    <div className="d-flex align-items-center gap-2">
+
+                      <button
+                        className="btn btn-outline-orange"
+                        onClick={() => eliminarDelCarrito(producto.id)}
                       >
-                        {producto.nombre}
-                      </h4>
+                        -
+                      </button>
 
-                      <p className="mb-1">
-                        <strong>Precio unitario:</strong> $
-                        {producto.precio.toLocaleString("es-AR")}
-                      </p>
+                      <span className="qty">{producto.cantidad}</span>
 
-                      <p className="mb-1">
-                        <strong>Cantidad:</strong> {producto.cantidad}
-                      </p>
+                      <button
+                        className="btn btn-orange"
+                        onClick={() => aumentarCantidad(producto.id)}
+                      >
+                        +
+                      </button>
 
-                      <p className="mb-3">
-                        <strong>Subtotal:</strong> $
-                        {(producto.precio * producto.cantidad).toLocaleString(
-                          "es-AR",
-                        )}
-                      </p>
-
-                      <div className="d-flex align-items-center gap-2">
-                        <button
-                          className="btn"
-                          style={{
-                            border: "1px solid #ff6600",
-                            color: "#ff6600",
-                            background: "transparent",
-                          }}
-                          onClick={() => eliminarDelCarrito(producto.id)}
-                        >
-                          -
-                        </button>
-
-                        <span className="fw-bold fs-5">
-                          {producto.cantidad}
-                        </span>
-
-                        <button
-                          className="btn"
-                          style={{
-                            background: "#ff6600",
-                            color: "white",
-                            border: "none",
-                          }}
-                          onClick={() => aumentarCantidad(producto.id)}
-                        >
-                          +
-                        </button>
-                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             ))}
 
-            <div
-              className="card mt-4"
-              style={{
-                background: "#1e1e1e",
-                border: "1px solid rgba(255,255,255,0.1)",
-                color: "white",
-              }}
-            >
-              <div className="card-body">
-                <h4 className="mb-3">📋 Resumen de compra</h4>
+            <div className="cart-summary">
 
-                <p>
-                  <strong>📦 Productos distintos:</strong> {productosDistintos}
-                </p>
+              <h3>📦 Resumen de compra</h3>
 
-                <p>
-                  <strong>👟 Unidades totales:</strong> {unidadesTotales}
-                  <p>
-                    <strong>🚚 Envío:</strong> Gratis
-                  </p>
-                </p>
+              <p>Productos distintos: <strong>{productosDistintos}</strong></p>
+              <p>Unidades totales: <strong>{unidadesTotales}</strong></p>
 
-                <hr />
+              <p>
+                🚚 Envío: <span className="free-shipping">Gratis</span>
+              </p>
 
-                <h3
-                  className="mb-4"
-                  style={{
-                    color: "#ff6600",
-                    fontWeight: "700",
-                  }}
-                >
-                  💰 Total: ${total.toLocaleString("es-AR")}
-                  <p style={{ color: "#28a745" }}>✔ Beneficio aplicado</p>
-                </h3>
+              <hr />
 
-                <button
-                  className="btn w-100"
-                  style={{
-                    background: "#ff6600",
-                    color: "white",
-                    border: "none",
-                    fontWeight: "600",
-                  }}
-                  onClick={confirmarCompra}
-                >
-                  Confirmar compra
-                </button>
+              <p className="total-label">TOTAL</p>
+
+              <div className="total-price">
+                ${total.toLocaleString("es-AR")}
               </div>
+
+              <p className="benefit">✔ Beneficio aplicado</p>
+
+              <button
+                className="btn btn-confirm"
+                onClick={confirmarCompra}
+              >
+                Confirmar compra
+              </button>
             </div>
           </>
         )}
