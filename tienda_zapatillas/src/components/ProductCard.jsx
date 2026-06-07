@@ -13,7 +13,15 @@ function ProductCard({ producto }) {
   const { agregarAlCarrito } = useContext(CarritoContext);
 
   const agregarProducto = () => {
-    agregarAlCarrito(producto);
+    const talleAutomatico =
+      producto.talles && producto.talles.length > 0
+        ? producto.talles[0]
+        : "Único";
+
+    agregarAlCarrito({
+      ...producto,
+      talleElegido: talleAutomatico,
+    });
   };
 
   return (

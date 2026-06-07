@@ -15,7 +15,7 @@ function ProductDetail() {
       setStock(stock - 1);
       agregarAlCarrito({
         ...producto,
-        talleElegido: talleSeleccionado || null,
+        talleElegido: talleSeleccionado,
       });
     }
   };
