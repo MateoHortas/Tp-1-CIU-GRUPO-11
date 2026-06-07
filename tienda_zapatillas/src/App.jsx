@@ -2,12 +2,13 @@ import { Route, Routes } from "react-router-dom";
 import { useState } from "react";
 import { TemaContext } from "./context/TemaContext";
 import { CarritoContext } from "./context/CarritoContext";
-import { LoginProvider } from "./context/LoginContext"; 
+import { LoginProvider } from "./context/LoginContext";
 import Navigation from "./components/Navbar";
 import Home from "./pages/Home";
 import ProductDetail from "./pages/ProductDetail";
-import Login from "./pages/Login"; 
+import Login from "./pages/Login";
 import Register from "./pages/Register";
+import AboutUS from "./pages/AboutUs";
 
 function App() {
   const [modoOscuro, setModoOscuro] = useState(false);
@@ -53,6 +54,7 @@ function App() {
               <Route path="/producto/:id" element={<ProductDetail />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/nosotros" element={<AboutUS />} />
             </Routes>
           </div>
         </CarritoContext.Provider>

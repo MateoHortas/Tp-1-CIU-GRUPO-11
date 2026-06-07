@@ -14,7 +14,7 @@ body{
   background-position:center;
   display:flex;
   align-items:center;
-  background-image: url(../public/heroImage.jpeg);
+ 
 }
 
 .hero-overlay{

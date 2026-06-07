@@ -50,6 +50,9 @@ function Navigation() {
             <Nav.Link as={NavLink} to="/nosotros">
               Nosotros
             </Nav.Link>
+             <Nav.Link as={NavLink} to="/contacto">
+              Contacto
+            </Nav.Link>
           </Nav>
 
           <Nav className="btn-nav-container align-items-center gap-2">
@@ -80,7 +83,7 @@ function Navigation() {
               )}
             </Nav.Link>
 
-            {/* 🌟 SECCIÓN DE AUTENTICACIÓN DINÁMICA (Al lado del carrito) */}
+            
             {usuario ? (
               // Si el usuario está conectado: muestra su nombre y botón para salir
               <div className="d-flex align-items-center gap-2 ms-2 user-logged-container">
