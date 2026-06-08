@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { LoginProvider } from "./context/LoginProvider";
 import { TemaProvider } from "./context/TemaProvider";
 import { CarritoProvider } from "./context/CarritoProvider";
-
+import UserContact from "./pages/UserContact";
 import Navigation from "./components/Navbar";
 import Home from "./pages/Home";
 import ProductDetail from "./pages/ProductDetail";
@@ -23,6 +23,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/nosotros" element={<AboutUS />} />
+            <Route path="/contacto" element={<UserContact />} />
           </Routes>
         </CarritoProvider>
       </TemaProvider>

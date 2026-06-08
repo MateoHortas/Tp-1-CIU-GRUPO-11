@@ -8,14 +8,11 @@ import {
   FiUser,
   FiLogOut,
 } from "react-icons/fi";
-
 import { TemaContext } from "../context/TemaContext";
 import { CarritoContext } from "../context/CarritoContext";
 import { LoginContext } from "../context/LoginContext";
 import { useAnimarCarrito } from "../hooks/useAnimarCarrito";
-
-import logoTriatlon from "../../public/logoTriatlon.png";
-
+import logoTriatlon from "../assets/logoTriatlon.png";
 import "../style/Navbar.css";
 
 function Navigation() {
@@ -93,6 +90,10 @@ function Navigation() {
 
             <Nav.Link as={NavLink} to="/nosotros">
               Nosotros
+            </Nav.Link>
+
+            <Nav.Link as={NavLink} to="/contacto">
+              Contacto
             </Nav.Link>
           </Nav>
 

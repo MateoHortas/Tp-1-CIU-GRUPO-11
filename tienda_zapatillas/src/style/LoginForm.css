@@ -1,6 +1,6 @@
 /* Estenedor principal de la tarjeta */
 .login-card {
-  max-width: 440px;
+  max-width:550px;
 }
 
 /* Ícono del encabezado con el candado/flecha */
@@ -62,72 +62,67 @@
   border-color: #ff6b00 ;
 }
 
-/* 🌟 Cuando el modo oscuro esté activo, cambiamos el fondo de la tarjeta del login */
+
 .modo-oscuro-activo .login-card {
-  background-color: #212529 !important; /* El gris oscuro de Bootstrap */
-  color: #f8f9fa !important; /* Letras blancas */
-  border-color: #495057 !important; /* Bordes más oscuros */
+  background-color: #212529 !important; 
+  color: #f8f9fa !important; 
+  border-color: #495057 !important;
 }
 
-/* Ajustamos también los textos secundarios del login para que no queden invisibles */
+
 .modo-oscuro-activo .login-card .text-muted,
 .modo-oscuro-activo .login-card .text-secondary {
-  color: #adb5bd !important; /* Gris claro para subtítulos */
+  color: #adb5bd !important; 
 }
 
-/* Opcional: Si querés que los inputs (campos para escribir) también cambien de color */
 .modo-oscuro-activo .login-card .form-control {
   background-color: #2b3035 !important;
   color: #fff !important;
   border-color: #495057 !important;
 }
 
-/* Evitamos que el fondo del "O CONTINÚA CON" quede con parche blanco */
+
 .modo-oscuro-activo .login-divider-text {
   background-color: #212529 !important;
   color: #adb5bd !important;
 }
-/* ==========================================================================
-   MÁGICA PARA EL MODO OSCURO (Letras e Inputs)
-   ========================================================================== */
 
-/* 1. Cuando el modo oscuro esté activo, cambiamos la tarjeta completa */
+
+
 .modo-oscuro-activo .login-card {
-  background-color: #212529 !important; /* Gris oscuro de Bootstrap */
-  border-color: #495057 !important;     /* Bordes oscuros sutiles */
+  background-color: #212529 !important; 
+  border-color: #495057 !important;     
 }
 
-/* 2. Forzamos a que TODOS los textos (título, labels, textos chicos) se vuelvan blancos */
+
 .modo-oscuro-activo .login-card .login-title,
 .modo-oscuro-activo .login-card .form-label,
 .modo-oscuro-activo .login-card p,
 .modo-oscuro-activo .login-card .text-muted,
 .modo-oscuro-activo .login-card .text-secondary {
-  color: #f8f9fa !important; /* Blanco tiza para que no queme los ojos */
+  color: #f8f9fa !important; 
 }
 
-/* 3. Evitamos que el parche del divisor "O CONTINÚA CON" quede con fondo blanco */
+
 .modo-oscuro-activo .login-divider-text {
   background-color: #212529 !important;
   color: #adb5bd !important;
 }
 
-/* 4. Ponemos los campos de texto (inputs) oscuros con letras blancas para que se lea lo que escribís */
+
 .modo-oscuro-activo .login-card .form-control {
   background-color: #2b3035 !important;
   color: #ffffff !important;
   border-color: #495057 !important;
 }
 
-/* 5. Cambiamos el color de los íconos de los inputs (el candado, el mail, el ojo) */
+
 .modo-oscuro-activo .login-card .input-group-text {
   background-color: #2b3035 !important;
   color: #ffffff !important;
   border-color: #495057 !important;
 }
-/* ==========================================================================
-   DETALLES EXTRA PARA MODO OSCURO (Botones Sociales y Placeholders)
-   ========================================================================== */
+
 
 
 .modo-oscuro-activo .login-card .btn-outline-secondary {
@@ -149,4 +144,15 @@
 
 .modo-oscuro-activo .login-card .login-link {
   color: #ff6a00 !important; 
+}
+
+/* Pisamos el diseño cuando se hace click (active/focus) en el botón principal */
+.btn-login-main:focus,
+.btn-login-main:active,
+.btn-login-main:focus-visible {
+  background-color: #e67e22 !important; /* Tu color naranja base (ajustalo si usás otra variante) */
+  border-color: #e67e22 !important;
+  color: #fff !important;
+  box-shadow: 0 0 0 0.25rem rgba(230, 126, 34, 0.25) !important; 
+  /* ↑ Esto genera el sombreado suave/difuminado alrededor del botón al cliquearlo */
 }
