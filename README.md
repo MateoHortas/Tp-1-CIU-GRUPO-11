@@ -77,7 +77,8 @@ http://localhost:5173
 ![Detalle](./screenshots/detalle.png)
 
 ### Carrito
-![Carrito](./screenshots/carrito.png)
+![Carrito](tienda_zapatillas/screenshots/detalleProducto1.png)
+![Carrito](tienda_zapatillas/screenshots/detalleProducto2.png)
 
 ---
 
