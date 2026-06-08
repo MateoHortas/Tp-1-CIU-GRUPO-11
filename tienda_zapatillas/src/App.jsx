@@ -7,7 +7,7 @@ import Navigation from "./components/Navbar";
 import Home from "./pages/Home";
 import ProductDetail from "./pages/ProductDetail";
 import Login from "./pages/Login";
-import Register from "./pages/RegisterForm";
+import Register from "./pages/Register";
 import AboutUS from "./pages/AboutUs";
 
 function App() {

@@ -8,11 +8,13 @@ import {
   FiUser,
   FiLogOut,
 } from "react-icons/fi";
+
 import { TemaContext } from "../context/TemaContext";
 import { CarritoContext } from "../context/CarritoContext";
 import { LoginContext } from "../context/LoginContext";
 import { useAnimarCarrito } from "../hooks/useAnimarCarrito";
-//import logoTriatlon from "../assets/logo.png";
+
+import logoTriatlon from "../../public/logoTriatlon.png";
 
 import "../style/Navbar.css";
 
@@ -54,14 +56,7 @@ function Navigation() {
           className="brand-container"
           onClick={cerrarMenu}
         >
-          <img
-            // --- AGREGAR LOGO ---
-            //src={logoTriatlon}
-            alt="Logo"
-            width="40"
-            height="40"
-            className="brand-logo"
-          />
+          <img src={logoTriatlon} alt="Logo" className="brand-logo" />
           <div className="brand-text-container">
             <span className="brand-text-main">Triatlon</span>
             <span className="brand-text-sub">Calzados</span>
@@ -120,7 +115,7 @@ function Navigation() {
               // Si el usuario está conectado: muestra su nombre y botón para salir
               <div className="user-logged-container">
                 <span className="user-logged-text">
-                  ¡Hola, <span className="user-name">{usuario.nombre}</span>!
+                  Hola, <span className="user-name">{usuario.nombre}</span> !
                 </span>
                 <button
                   onClick={manejarLogout}

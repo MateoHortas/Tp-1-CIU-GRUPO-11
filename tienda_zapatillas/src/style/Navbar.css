@@ -34,6 +34,8 @@ body,
   background-color: var(--bg-navbar);
   transition: background-color 0.3s ease;
   border-bottom: 1px solid var(--accent);
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
 }
 
 /* --- MARCA (LOGO Y TEXTO) --- */
@@ -175,15 +177,16 @@ body,
 .user-name {
   font-weight: 600;
   color: var(--accent);
+  text-transform: capitalize;
 }
 
 .btn-logout {
-  color: #dc3545;
+  color: var(--accent);
   transition: opacity 0.2s ease;
 }
 
 .btn-logout:hover {
-  color: #ff0019 !important;
+  color: #ff0022 !important;
   opacity: 0.8;
 }
 
