@@ -66,9 +66,9 @@ http://localhost:5173
 ## 📸 Capturas de Pantalla
 
 ### Página Principal
-![Home](./screenshots/home1.png)
-![Home](./screenshots/home2.png)
-![Home](./screenshots/home3.png)
+![Home](tienda_zapatillas/screenshots/home1.png)
+![Home](tienda_zapatillas/screenshots/home2.png)
+![Home](tienda_zapatillas/screenshots/home3.png)
 
 ### Catálogo
 ![Catalogo](./screenshots/catalogo.png)
