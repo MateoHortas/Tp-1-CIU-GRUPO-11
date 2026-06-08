@@ -80,6 +80,19 @@ http://localhost:5173
 ### Carrito
 ![Carrito](tienda_zapatillas/screenshots/carrito1.png)
 
+### Nosotros
+![Nosotros](tienda_zapatillas/screenshots/nosotros1.png)
+![Nosotros](tienda_zapatillas/screenshots/nosotros2.png)
+
+### Contacto
+![Contacto](tienda_zapatillas/screenshots/contacto.png)
+
+### Registro
+![Registro](tienda_zapatillas/screenshots/registro.png)
+
+### Inicio de sesion 
+![InicioDeSesion](tienda_zapatillas/screenshots/inicioDeSesion.png)
+
 
 ---
 
