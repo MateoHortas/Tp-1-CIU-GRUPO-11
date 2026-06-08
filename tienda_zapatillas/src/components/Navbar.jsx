@@ -1,9 +1,16 @@
 import { useContext, useState } from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
-import { FiSun, FiMoon, FiShoppingCart } from "react-icons/fi";
+import {
+  FiSun,
+  FiMoon,
+  FiShoppingCart,
+  FiUser,
+  FiLogOut,
+} from "react-icons/fi";
 import { TemaContext } from "../context/TemaContext";
 import { CarritoContext } from "../context/CarritoContext";
+import { LoginContext } from "../context/LoginContext";
 import { useAnimarCarrito } from "../hooks/useAnimarCarrito";
 //import logoTriatlon from "../assets/logo.png";
 
@@ -13,6 +20,8 @@ function Navigation() {
   const { modoOscuro, cambiarTema } = useContext(TemaContext);
 
   const { cantidadCarrito } = useContext(CarritoContext);
+
+  const { usuario, logout } = useContext(LoginContext);
 
   const animar = useAnimarCarrito(cantidadCarrito);
 
@@ -25,13 +34,18 @@ function Navigation() {
     cerrarMenu();
   };
 
+  const manejarLogout = () => {
+    logout();
+    cerrarMenu();
+  };
+
   return (
     <Navbar
       expand="lg"
       sticky="top"
       className="shadow-sm"
       expanded={expandido}
-      onToggle={(abierto) => setExpandido(abierto)}
+      onToggle={setExpandido}
     >
       <Container>
         <Navbar.Brand
@@ -82,15 +96,17 @@ function Navigation() {
               Productos
             </Nav.Link>
 
-            <Nav.Link as={NavLink} to="/contacto">
-              Contacto
+            <Nav.Link as={NavLink} to="/nosotros">
+              Nosotros
             </Nav.Link>
           </Nav>
 
           <Nav className="btn-nav-container">
             <button
               className="btn-nav-icono"
-              aria-label={modoOscuro ? "Modo oscuro" : "Modo claro"}
+              aria-label={
+                modoOscuro ? "Cambiar a modo claro" : "Cambiar a modo oscuro"
+              }
               onClick={alternarTema}
             >
               {modoOscuro ? (
@@ -99,6 +115,37 @@ function Navigation() {
                 <FiMoon strokeWidth={1.8} />
               )}
             </button>
+
+            {usuario ? (
+              // Si el usuario está conectado: muestra su nombre y botón para salir
+              <div className="user-logged-container">
+                <span className="user-logged-text">
+                  ¡Hola, <span className="user-name">{usuario.nombre}</span>!
+                </span>
+                <button
+                  onClick={manejarLogout}
+                  className="btn-nav-icono btn-logout"
+                  title="Cerrar sesión"
+                  aria-label="Cerrar sesión"
+                >
+                  <FiLogOut strokeWidth={1.8} />
+                </button>
+              </div>
+            ) : (
+              // Si no hay nadie conectado: muestra el enlace clásico para ir al formulario
+              <div className="user-auth-container">
+                <Nav.Link
+                  as={NavLink}
+                  to="/login"
+                  onClick={cerrarMenu}
+                  className="btn-nav-icono boton-login"
+                  title="Iniciar sesión"
+                  aria-label="Iniciar sesión"
+                >
+                  <FiUser strokeWidth={1.8} />
+                </Nav.Link>
+              </div>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

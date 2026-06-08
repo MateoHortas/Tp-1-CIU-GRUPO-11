@@ -91,7 +91,7 @@ body,
   z-index: 10;
 }
 
-/* BOTONES DE ACCIÓN (DARK MODE Y CARRITO) */
+/* --- BOTONES DARK MODE, CARRITO Y LOGIN --- */
 .btn-nav-icono {
   color: var(--text-main);
   background-color: transparent;
@@ -109,7 +109,8 @@ body,
 }
 
 .btn-nav-icono:hover,
-.boton-carrito.active {
+.boton-carrito.active,
+.boton-login.active {
   color: var(--accent) !important;
 }
 
@@ -152,12 +153,38 @@ body,
   opacity: 1;
 }
 
-/* --- BOTÓN DARK MODE  --- */
+/* --- CONTENEDOR DE ACCIONES Y AUTENTICACIÓN --- */
 .navbar .btn-nav-container {
   display: flex;
-  flex-direction: row;
   align-items: center;
   gap: 12px;
+}
+
+/* --- USUARIO AUTENTICADO --- */
+.user-logged-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.user-logged-text {
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.user-name {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.btn-logout {
+  color: #dc3545;
+  transition: opacity 0.2s ease;
+}
+
+.btn-logout:hover {
+  color: #ff0019 !important;
+  opacity: 0.8;
 }
 
 /* --- MENÚ HAMBURGUESA --- */
@@ -172,7 +199,7 @@ body,
   color: #fff;
   font-size: 0.65rem;
   font-weight: 700;
-  width: 18px;
+  min-width: 18px;
   height: 18px;
   border-radius: 50%;
   display: inline-flex;
@@ -212,6 +239,13 @@ body,
     padding: 10px 0;
     width: 100%;
     justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .user-logged-container {
+    justify-content: center;
+    width: 100%;
+    margin-top: 8px;
   }
 
   .menu-principal {
