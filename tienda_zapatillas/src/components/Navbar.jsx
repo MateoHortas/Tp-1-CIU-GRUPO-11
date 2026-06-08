@@ -1,42 +1,88 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
-import { FiSun, FiMoon, FiShoppingCart, FiUser, FiLogOut } from "react-icons/fi"; // 🌟 Importamos íconos de usuario
+import {
+  FiSun,
+  FiMoon,
+  FiShoppingCart,
+  FiUser,
+  FiLogOut,
+} from "react-icons/fi";
+
 import { TemaContext } from "../context/TemaContext";
 import { CarritoContext } from "../context/CarritoContext";
-import { LoginContext } from "../context/LoginContext"; // 🌟 Importamos tu nuevo contexto
+import { LoginContext } from "../context/LoginContext";
 import { useAnimarCarrito } from "../hooks/useAnimarCarrito";
+
 import logoTriatlon from "../../public/logoTriatlon.png";
 
 import "../style/Navbar.css";
 
 function Navigation() {
   const { modoOscuro, cambiarTema } = useContext(TemaContext);
+
   const { cantidadCarrito } = useContext(CarritoContext);
-  const { usuario, logout } = useContext(LoginContext); // 🌟 Consumimos el estado global del usuario
+
+  const { usuario, logout } = useContext(LoginContext);
 
   const animar = useAnimarCarrito(cantidadCarrito);
 
+  const [expandido, setExpandido] = useState(false);
+
+  const cerrarMenu = () => setExpandido(false);
+
+  const alternarTema = () => {
+    cambiarTema();
+    cerrarMenu();
+  };
+
+  const manejarLogout = () => {
+    logout();
+    cerrarMenu();
+  };
+
   return (
-    <Navbar expand="lg" sticky="top" className="shadow-sm">
+    <Navbar
+      expand="lg"
+      sticky="top"
+      className="shadow-sm"
+      expanded={expandido}
+      onToggle={setExpandido}
+    >
       <Container>
-        <Navbar.Brand as={Link} to="/" className="brand-container">
-          <img
-            // --- AGREGAR LOGO ---
-            src={logoTriatlon}
-            alt="Logo"
-            className="brand-logo"
-          />
+        <Navbar.Brand
+          as={Link}
+          to="/"
+          className="brand-container"
+          onClick={cerrarMenu}
+        >
+          <img src={logoTriatlon} alt="Logo" className="brand-logo" />
           <div className="brand-text-container">
             <span className="brand-text-main">Triatlon</span>
             <span className="brand-text-sub">Calzados</span>
           </div>
         </Navbar.Brand>
 
+        <div className="carrito-flotante-container">
+          <Nav.Link
+            as={NavLink}
+            to="/carrito"
+            onClick={cerrarMenu}
+            className={`btn-nav-icono boton-carrito ${animar ? "animar-carrito" : ""}`}
+            aria-label="Carrito de compras"
+          >
+            <FiShoppingCart strokeWidth={1.8} />
+
+            {cantidadCarrito > 0 && (
+              <span className="numero-carrito">{cantidadCarrito}</span>
+            )}
+          </Nav.Link>
+        </div>
+
         <Navbar.Toggle aria-controls="menu-principal" />
 
         <Navbar.Collapse id="menu-principal">
-          <Nav className="menu-principal mx-auto">
+          <Nav className="menu-principal mx-auto" onClick={cerrarMenu}>
             <Nav.Link as={NavLink} to="/" end>
               Inicio
             </Nav.Link>
@@ -48,17 +94,15 @@ function Navigation() {
             <Nav.Link as={NavLink} to="/nosotros">
               Nosotros
             </Nav.Link>
-             <Nav.Link as={NavLink} to="/contacto">
-              Contacto
-            </Nav.Link>
           </Nav>
 
-          <Nav className="btn-nav-container align-items-center gap-2">
-            {/* Botón de Modo Oscuro */}
+          <Nav className="btn-nav-container">
             <button
               className="btn-nav-icono"
-              aria-label="Modo oscuro"
-              onClick={cambiarTema}
+              aria-label={
+                modoOscuro ? "Cambiar a modo claro" : "Cambiar a modo oscuro"
+              }
+              onClick={alternarTema}
             >
               {modoOscuro ? (
                 <FiSun strokeWidth={1.8} />
@@ -67,30 +111,15 @@ function Navigation() {
               )}
             </button>
 
-            {/* Botón del Carrito */}
-            <Nav.Link
-              as={NavLink}
-              to="/carrito"
-              className={`btn-nav-icono boton-carrito me-1 ${animar && "animar-carrito"}`}
-              aria-label="Carrito de compras"
-            >
-              <FiShoppingCart strokeWidth={1.8} />
-
-              {cantidadCarrito > 0 && (
-                <span className="numero-carrito">{cantidadCarrito}</span>
-              )}
-            </Nav.Link>
-
-            
             {usuario ? (
               // Si el usuario está conectado: muestra su nombre y botón para salir
-              <div className="d-flex align-items-center gap-2 ms-2 user-logged-container">
-                <span className="small fw-semibold text-secondary d-none d-sm-inline">
-                  ¡Hola, <span className="text-dark">{usuario.nombre}</span>!
+              <div className="user-logged-container">
+                <span className="user-logged-text">
+                  Hola, <span className="user-name">{usuario.nombre}</span> !
                 </span>
-                <button 
-                  onClick={logout} 
-                  className="btn-nav-icono text-danger" 
+                <button
+                  onClick={manejarLogout}
+                  className="btn-nav-icono btn-logout"
                   title="Cerrar sesión"
                   aria-label="Cerrar sesión"
                 >
@@ -99,15 +128,18 @@ function Navigation() {
               </div>
             ) : (
               // Si no hay nadie conectado: muestra el enlace clásico para ir al formulario
-              <Nav.Link
-                as={NavLink}
-                to="/login"
-                className="btn-nav-icono"
-                title="Iniciar sesión"
-                aria-label="Iniciar sesión"
-              >
-                <FiUser strokeWidth={1.8} />
-              </Nav.Link>
+              <div className="user-auth-container">
+                <Nav.Link
+                  as={NavLink}
+                  to="/login"
+                  onClick={cerrarMenu}
+                  className="btn-nav-icono boton-login"
+                  title="Iniciar sesión"
+                  aria-label="Iniciar sesión"
+                >
+                  <FiUser strokeWidth={1.8} />
+                </Nav.Link>
+              </div>
             )}
           </Nav>
         </Navbar.Collapse>
