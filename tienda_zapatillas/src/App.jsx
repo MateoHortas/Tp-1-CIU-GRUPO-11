@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import { TemaContext } from "./context/TemaContext";
 import { CarritoContext } from "./context/CarritoContext";
-import { LoginProvider } from "./context/LoginContext";
+import { LoginProvider } from "./context/LoginProvider";
 
 import Navigation from "./components/Navbar";
 
