@@ -5,8 +5,10 @@
 .services-section {
   background: #f4ece7;
   padding: 50px 0;
-  color: #212529; 
-  transition: background-color 0.3s ease, color 0.3s ease; 
+  color: #212529;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 .services-section .row {
@@ -49,19 +51,16 @@
    MÁGICA PARA EL MODO OSCURO AUTOMÁTICO
    ========================================================================== */
 
-
 .modo-oscuro-activo .services-section {
-  background: #1a1d20 !important; 
-  color: #f8f9fa !important;      
+  background: #1a1d20 !important;
+  color: #f8f9fa !important;
 }
-
 
 .modo-oscuro-activo .services-section i {
-  color: #ff6a00 !important; 
+  color: #ff6a00 !important;
 }
-
 
 .modo-oscuro-activo .footer-custom {
   border-top: 1px solid #2b3035 !important;
-  background: #0f111a !important; 
+  background: #0f111a !important;
 }

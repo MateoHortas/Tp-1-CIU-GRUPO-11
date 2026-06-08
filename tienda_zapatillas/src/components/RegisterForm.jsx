@@ -1,15 +1,26 @@
 import { Form, Button, Row, Col, Card, InputGroup } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import { FiUser, FiMail, FiLock, FiUserPlus } from "react-icons/fi";
+import {
+  FiUser,
+  FiMail,
+  FiLock,
+  FiUserPlus,
+  FiPhone,
+  FiMapPin,
+  FiMap,
+  FiTruck,
+  FiMessageSquare,
+} from "react-icons/fi";
 import { RiLockPasswordLine } from "react-icons/ri"; // Ícono para confirmar contraseña
 import Alert from "react-bootstrap/Alert";
 import { FcGoogle } from "react-icons/fc";
-import { FaApple, FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "../style/LoginForm.css"; // Reutilizamos los estilos base de colores y botones
 import { Link } from "react-router-dom";
 
 function RegisterForm() {
   const [usuarios, setUsuarios] = useState([]);
+
   // Cargar usuarios del localStorage al iniciar
   useEffect(() => {
     const guardados = JSON.parse(localStorage.getItem("usuarios")) || [];
@@ -19,6 +30,11 @@ function RegisterForm() {
   const [form, setForm] = useState({
     nombre: "",
     email: "",
+    telefono: "",
+    direccion: "",
+    localidad: "",
+    metodoEntrega: "domicilio",
+    mensaje: "",
     password: "",
     confirmPassword: "",
     acceptTerms: false,
@@ -60,12 +76,29 @@ function RegisterForm() {
       nuevosErrores.email = "Email inválido";
     }
 
-    // Email repetido - ESTA ES LA CLAVE
+    // Email repetido
     const emailExiste = usuarios.some(
       (u) => u.email.toLowerCase() === form.email.toLowerCase(),
     );
     if (emailExiste) {
       nuevosErrores.email = "Este email ya está registrado";
+    }
+
+    // Teléfono obligatorio (Validación de solo números básica u opcional)
+    if (!form.telefono.trim()) {
+      nuevosErrores.telefono = "El teléfono es obligatorio";
+    } else if (!/^[0-9+\s-]+$/.test(form.telefono)) {
+      nuevosErrores.telefono = "Número de teléfono inválido";
+    }
+
+    // Dirección obligatoria
+    if (!form.direccion.trim()) {
+      nuevosErrores.direccion = "La dirección es obligatoria";
+    }
+
+    // Localidad obligatoria
+    if (!form.localidad.trim()) {
+      nuevosErrores.localidad = "La localidad es obligatoria";
     }
 
     // Password
@@ -78,8 +111,7 @@ function RegisterForm() {
       nuevosErrores.confirmPassword = "Las contraseñas no coinciden";
     }
 
-    // Terminos y condiciones
-
+    // Términos y condiciones
     if (!form.acceptTerms) {
       nuevosErrores.acceptTerms = "Debes aceptar los términos y condiciones";
     }
@@ -93,14 +125,19 @@ function RegisterForm() {
 
     if (!validarForm()) return;
 
-    // Crear nuevo usuario - NO guardes confirmPassword
+    // Crear nuevo usuario con los campos añadidos
     const nuevoUsuario = {
       id: Date.now(),
       nombre: form.nombre.trim(),
       email: form.email.toLowerCase(),
+      telefono: form.telefono.trim(),
+      direccion: form.direccion.trim(),
+      localidad: form.localidad.trim(),
+      metodoEntrega: form.metodoEntrega,
+      mensaje: form.mensaje.trim(),
       password: form.password,
       acceptTerms: form.acceptTerms,
-      isLoggedIn: false, // Ojo: en proyecto real esto va hasheado
+      isLoggedIn: false,
     };
 
     // Guardar en array y localStorage
@@ -108,20 +145,22 @@ function RegisterForm() {
     setUsuarios(nuevosUsuarios);
     localStorage.setItem("usuarios", JSON.stringify(nuevosUsuarios));
 
-    console.log("Usuario registrado:", nuevoUsuario);
-    console.log("Todos los usuarios:", nuevosUsuarios);
+    console.log("Usuario registrado con envío:", nuevoUsuario);
 
-    // Limpiar form y mostrar mensaje
-
+    // Limpiar form restableciendo los valores iniciales vacíos
     setForm({
       nombre: "",
       email: "",
+      telefono: "",
+      direccion: "",
+      localidad: "",
+      metodoEntrega: "domicilio",
+      mensaje: "",
       password: "",
       confirmPassword: "",
       acceptTerms: false,
     });
 
-    //Limpiamos por completo el estado de errores para reiniciar la interfaz visual
     setErrors({});
     setRegistroOK(true);
     setTimeout(() => setRegistroOK(false), 3000);
@@ -133,7 +172,7 @@ function RegisterForm() {
   return (
     <>
       {registroOK && (
-        <Alert className="" variant="success" className="mb-3">
+        <Alert variant="success" className="mb-3">
           ¡Registro exitoso! Ya podés iniciar sesión
         </Alert>
       )}
@@ -151,10 +190,7 @@ function RegisterForm() {
           <Form onSubmit={handleSubmit} noValidate>
             {/* Nombre Completo */}
             <Form.Group className="mb-3" controlId="registerName">
-              <Form.Label
-                className="fw-semibold text-secondary small "
-                //style={{ fontSize: "0.75rem" }}
-              >
+              <Form.Label className="fw-semibold text-secondary small">
                 Nombre Completo
               </Form.Label>
               <InputGroup hasValidation>
@@ -179,10 +215,7 @@ function RegisterForm() {
 
             {/* Correo Electrónico */}
             <Form.Group className="mb-3" controlId="registerEmail">
-              <Form.Label
-                className="fw-semibold text-secondary small"
-                //style={{ fontSize: "0.75rem" }}
-              >
+              <Form.Label className="fw-semibold text-secondary small">
                 Correo Electrónico
               </Form.Label>
               <InputGroup hasValidation>
@@ -205,10 +238,128 @@ function RegisterForm() {
               </InputGroup>
             </Form.Group>
 
-            {/* Contraseña y Confirmar Contraseña (En la misma fila con Row y Col) */}
+            {/* Teléfono */}
+            <Form.Group className="mb-3" controlId="registerPhone">
+              <Form.Label className="fw-semibold text-secondary small">
+                Teléfono de Contacto
+              </Form.Label>
+              <InputGroup hasValidation>
+                <InputGroup.Text className="bg-transparent border-end-0 text-muted">
+                  <FiPhone />
+                </InputGroup.Text>
+                <Form.Control
+                  type="tel"
+                  name="telefono"
+                  value={form.telefono}
+                  placeholder="Ej. 11 2345-6789"
+                  className="border-start-0 ps-1"
+                  isInvalid={!!errors.telefono}
+                  onChange={handleChange}
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  {errors.telefono}
+                </Form.Control.Feedback>
+              </InputGroup>
+            </Form.Group>
 
-            <Form.Group controlId="registerPassword">
-              <Form.Label className="fw-bold text-secondary small">
+            {/* Dirección y Localidad en la misma fila */}
+            {/* Dirección (Suelta con espacio abajo) */}
+            <Form.Group className="mb-3" controlId="registerAddress">
+              <Form.Label className="fw-semibold text-secondary small">
+                Dirección (Calle y Altura)
+              </Form.Label>
+              <InputGroup hasValidation>
+                <InputGroup.Text className="bg-transparent border-end-0 text-muted">
+                  <FiMapPin />
+                </InputGroup.Text>
+                <Form.Control
+                  type="text"
+                  name="direccion"
+                  value={form.direccion}
+                  placeholder="Ej. Av. Siempreviva 742"
+                  className="border-start-0 ps-1"
+                  isInvalid={!!errors.direccion}
+                  onChange={handleChange}
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  {errors.direccion}
+                </Form.Control.Feedback>
+              </InputGroup>
+            </Form.Group>
+
+            {/* Localidad (Suelta con espacio abajo) */}
+            <Form.Group className="mb-3" controlId="registerLocation">
+              <Form.Label className="fw-semibold text-secondary small">
+                Localidad
+              </Form.Label>
+              <InputGroup hasValidation>
+                <InputGroup.Text className="bg-transparent border-end-0 text-muted">
+                  <FiMap />
+                </InputGroup.Text>
+                <Form.Control
+                  type="text"
+                  name="localidad"
+                  value={form.localidad}
+                  placeholder="Ej. Morón"
+                  className="border-start-0 ps-1"
+                  isInvalid={!!errors.localidad}
+                  onChange={handleChange}
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  {errors.localidad}
+                </Form.Control.Feedback>
+              </InputGroup>
+            </Form.Group>
+          
+            {/* Método de Entrega */}
+            <Form.Group className="mb-3" controlId="registerDelivery">
+              <Form.Label className="fw-semibold text-secondary small">
+                Método de Entrega
+              </Form.Label>
+              <InputGroup>
+                <InputGroup.Text className="bg-transparent border-end-0 text-muted">
+                  <FiTruck />
+                </InputGroup.Text>
+                <Form.Select
+                  name="metodoEntrega"
+                  value={form.metodoEntrega}
+                  onChange={handleChange}
+                  className="border-start-0 ps-1"
+                >
+                  <option value="domicilio">Envío a Domicilio</option>
+                  <option value="retiro">Retiro en Punto de Venta</option>
+                </Form.Select>
+              </InputGroup>
+            </Form.Group>
+
+            {/* Mensaje o Aclaración Opcional */}
+            <Form.Group className="mb-3" controlId="registerMessage">
+              <Form.Label className="fw-semibold text-secondary small">
+                Mensaje o Aclaración{" "}
+                <span className="text-muted fw-normal">(Opcional)</span>
+              </Form.Label>
+              <InputGroup>
+                <InputGroup.Text className="bg-transparent border-end-0 text-muted align-items-start pt-2">
+                  <FiMessageSquare />
+                </InputGroup.Text>
+                <Form.Control
+                  as="textarea"
+                  rows={2}
+                  name="mensaje"
+                  value={form.mensaje}
+                  placeholder="Ej. Timbre B, dejar en portería, etc."
+                  className="border-start-0 ps-1"
+                  onChange={handleChange}
+                />
+              </InputGroup>
+            </Form.Group>
+
+            {/* Contraseña */}
+            <Form.Group className="mb-3" controlId="registerPassword">
+              <Form.Label className="fw-semibold text-secondary small">
                 Contraseña
               </Form.Label>
               <InputGroup hasValidation>
@@ -223,7 +374,6 @@ function RegisterForm() {
                   onChange={handleChange}
                   isInvalid={!!errors.password}
                   required
-                  // Se pone rojo si las contraseñas no coinciden
                 />
                 <Button
                   variant="outline-secondary"
@@ -239,9 +389,8 @@ function RegisterForm() {
             </Form.Group>
 
             {/* Confirmar Contraseña */}
-
-            <Form.Group controlId="registerConfirmPassword">
-              <Form.Label className="fw-bold text-secondary small">
+            <Form.Group className="mb-3" controlId="registerConfirmPassword">
+              <Form.Label className="fw-semibold text-secondary small">
                 Repetir contraseña
               </Form.Label>
               <InputGroup hasValidation>
@@ -265,26 +414,23 @@ function RegisterForm() {
                 >
                   {showConfirmPass ? <FaEye /> : <FaEyeSlash />}
                 </Button>
-                {/* Muestra el error específico de coincidencia o el de campo vacío */}
                 <Form.Control.Feedback type="invalid">
                   {errors.confirmPassword}
                 </Form.Control.Feedback>
-                <Form.Control.Feedback type="valid"></Form.Control.Feedback>
               </InputGroup>
             </Form.Group>
 
             {/* Checkbox Términos y Condiciones */}
             <Form.Group className="mb-4" controlId="registerTerms">
               <Form.Check
-                hasValidation
                 type="checkbox"
                 name="acceptTerms"
                 className="small text-muted"
                 onChange={handleChange}
                 isInvalid={!!errors.acceptTerms}
-                feedback={errors.acceptTerms} // <-- AGREGA ESTO (Pasa el texto del error)
+                feedback={errors.acceptTerms}
                 feedbackType="invalid"
-                required // Hace que marcarlo sea obligatorio para enviar
+                required
                 label={
                   <span>
                     Acepto los{" "}
@@ -319,20 +465,12 @@ function RegisterForm() {
 
           {/* Botones Sociales */}
           <Row className="g-3 mb-4">
-            <Col xs={6}>
+            <Col xs={12}>
               <Button
                 variant="outline-secondary"
                 className="w-100 d-flex align-items-center justify-content-center gap-2 bg-transparent text-dark border-light-subtle py-2 small fw-semibold"
               >
                 <FcGoogle size={18} /> Google
-              </Button>
-            </Col>
-            <Col xs={6}>
-              <Button
-                variant="outline-secondary"
-                className="w-100 d-flex align-items-center justify-content-center gap-2 bg-transparent text-dark border-light-subtle py-2 small fw-semibold"
-              >
-                <FaApple size={18} className="text-dark" /> Apple
               </Button>
             </Col>
           </Row>
@@ -344,7 +482,7 @@ function RegisterForm() {
               to="/login"
               className="fw-bold text-decoration-none login-link"
             >
-              Iniciar sesion
+              Iniciar sesión
             </Link>
           </div>
         </Card.Body>

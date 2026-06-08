@@ -1,5 +1,6 @@
-import "../style/ProductCard.css";
 import { Link } from "react-router-dom";
+
+import "../style/ProductCard.css";
 
 function ProductCard({ producto, agregarAlCarrito }) {
   const { nombre, categoria, precio, imagen, descripcion, stock } = producto;
@@ -21,7 +22,6 @@ function ProductCard({ producto, agregarAlCarrito }) {
         boxShadow: "0 4px 15px rgba(0,0,0,0.3)",
       }}
     >
-      {/* CONTENEDOR DE LA IMAGEN FIJO Y SEGURO */}
       <div
         style={{
           width: "100%",
@@ -45,6 +45,7 @@ function ProductCard({ producto, agregarAlCarrito }) {
             display: "block",
           }}
         />
+
         {stock === 0 && (
           <span
             style={{
@@ -65,7 +66,6 @@ function ProductCard({ producto, agregarAlCarrito }) {
         )}
       </div>
 
-      {/* CUERPO DE LA TARJETA */}
       <div
         style={{
           padding: "20px",

@@ -29,14 +29,6 @@ body,
     color 0.3s ease;
 }
 
-h1,
-p,
-.modo-oscuro-activo h1,
-.modo-oscuro-activo p {
-  color: var(--text-main);
-  transition: color 0.3s ease;
-}
-
 /* --- NAVBAR --- */
 .navbar {
   background-color: var(--bg-navbar);
@@ -50,14 +42,13 @@ p,
 .brand-container {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
   text-decoration: none;
 }
 
 .brand-logo {
-  width: 60px;
-  height: 60px;
-  margin-right: 12px;
+  width: 40px;
+  height: 40px;
   object-fit: contain;
   flex-shrink: 0;
 
@@ -93,6 +84,38 @@ p,
   letter-spacing: 2px;
 }
 
+/* --- CARRITO FLOTANTE --- */
+.carrito-flotante-container {
+  margin-left: auto;
+  margin-right: 25px;
+  display: flex;
+  align-items: center;
+  z-index: 10;
+}
+
+/* --- BOTONES DARK MODE, CARRITO Y LOGIN --- */
+.btn-nav-icono {
+  color: var(--text-main);
+  background-color: transparent;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  font-size: 1.35rem;
+  padding: 6px;
+  cursor: pointer;
+  position: relative;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.btn-nav-icono:hover,
+.boton-carrito.active,
+.boton-login.active {
+  color: var(--accent) !important;
+}
+
 /* --- MENÚ PRINCIPAL DE NAVEGACIÓN --- */
 .menu-principal .nav-link {
   color: var(--text-main);
@@ -108,7 +131,7 @@ p,
 
 .menu-principal .nav-link:hover,
 .menu-principal .nav-link.active {
-  color: var(--accent) !important;
+  color: var(--accent);
 }
 
 .menu-principal .nav-link:hover {
@@ -132,35 +155,42 @@ p,
   opacity: 1;
 }
 
-/* --- BOTONES DE ACCIÓN (TEMA Y CARRITO) --- */
+/* --- CONTENEDOR DE ACCIONES Y AUTENTICACIÓN --- */
 .navbar .btn-nav-container {
   display: flex;
-  flex-direction: row;
   align-items: center;
   gap: 12px;
 }
 
-.btn-nav-container .btn-nav-icono {
-  color: var(--text-main);
-  background-color: transparent;
-  border: none;
-  display: inline-flex;
+/* --- USUARIO AUTENTICADO --- */
+.user-logged-container {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 1.35rem;
-  padding: 6px;
-  cursor: pointer;
-  position: relative;
-  text-decoration: none;
-  transition: color 0.3s ease;
+  gap: 8px;
 }
 
-.btn-nav-container .btn-nav-icono:hover,
-.btn-nav-container .boton-carrito.active {
-  color: var(--accent) !important;
+.user-logged-text {
+  font-size: 0.85rem;
+  white-space: nowrap;
 }
 
-/* --- ICONO DEL MENÚ HAMBURGUESA --- */
+.user-name {
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: capitalize;
+}
+
+.btn-logout {
+  color: var(--accent);
+  transition: opacity 0.2s ease;
+}
+
+.btn-logout:hover {
+  color: #ff0022 !important;
+  opacity: 0.8;
+}
+
+/* --- MENÚ HAMBURGUESA --- */
 .navbar-toggler-icon {
   filter: invert(var(--toggler-invert));
   transition: filter 0.3s ease;
@@ -172,7 +202,7 @@ p,
   color: #fff;
   font-size: 0.65rem;
   font-weight: 700;
-  width: 18px;
+  min-width: 18px;
   height: 18px;
   border-radius: 50%;
   display: inline-flex;
@@ -189,10 +219,6 @@ p,
   display: inline-block;
 }
 
-.animar-carrito {
-  animation: popCarrito 0.3s ease-out;
-}
-
 @keyframes popCarrito {
   0% {
     transform: scale(1); /* Tamaño original */
@@ -205,6 +231,10 @@ p,
   }
 }
 
+.animar-carrito {
+  animation: popCarrito 0.3s ease-out;
+}
+
 /* --- AJUSTES RESPONSIVE (TABLETS Y CELULARES) --- */
 @media (max-width: 991px) {
   .btn-nav-container {
@@ -212,6 +242,13 @@ p,
     padding: 10px 0;
     width: 100%;
     justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .user-logged-container {
+    justify-content: center;
+    width: 100%;
+    margin-top: 8px;
   }
 
   .menu-principal {
@@ -221,7 +258,7 @@ p,
   }
 
   .navbar-toggler {
-    border-color: var(--toggler-border) !important;
+    border-color: var(--toggler-border);
     transition:
       border-color 0.2s ease,
       box-shadow 0.2s ease;
@@ -230,7 +267,24 @@ p,
   .navbar-toggler:focus,
   .navbar-toggler:active {
     outline: none;
-    border-color: var(--accent) !important;
+    border-color: var(--accent);
     box-shadow: 0 0 0 3px var(--accent) !important;
+  }
+}
+
+/* --- AJUSTES RESPONSIVE PC --- */
+@media (min-width: 992px) {
+  .brand-container {
+    order: 1;
+  }
+
+  #menu-principal {
+    order: 2;
+  }
+
+  .carrito-flotante-container {
+    order: 3;
+    margin-left: 12px;
+    margin-right: 0;
   }
 }

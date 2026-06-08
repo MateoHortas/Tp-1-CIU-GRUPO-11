@@ -56,13 +56,13 @@ function LoginForm() {
   const validarForm = () => {
     const nuevosErrores = {};
 
-    // Email formato (Igual que en Registro)
+    // Email formato
     const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!regexEmail.test(credentials.email)) {
       nuevosErrores.email = "Email inválido";
     }
 
-    // Password longitud (Igual que en Registro)
+    // Password longitud
     if (credentials.password.length < 6) {
       nuevosErrores.password = "Mínimo 6 caracteres";
     }
@@ -74,7 +74,7 @@ function LoginForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // 1. Control seguro: si ya está conectado, frena el re-ingreso
+    // Control seguro: si ya está conectado, frena el re-ingreso
     if (usuario && usuario.email) {
       setLoginError("Ya tienes una sesión activa en este dispositivo.");
       setTimeout(() => setLoginError(""), 4000);
@@ -83,10 +83,10 @@ function LoginForm() {
 
     if (!validarForm()) return;
 
-    // 2. Traemos usuarios de localStorage
+    // Traemos usuarios de localStorage
     const usuariosFrescos = JSON.parse(localStorage.getItem("usuarios")) || [];
 
-    // 3. Buscamos si el email existe
+    //  Buscamos si el email existe
     const usuarioEncontrado = usuariosFrescos.find(
       (u) =>
         u.email &&
@@ -99,14 +99,14 @@ function LoginForm() {
       return;
     }
 
-    // 4. Verificamos la contraseña
+    //  Verificamos la contraseña
     if (usuarioEncontrado.password !== credentials.password) {
       setLoginError("Contraseña incorrecta.");
       setTimeout(() => setLoginError(""), 3000);
       return;
     }
 
-    // 5. Login Exitoso: Modificamos la lista
+    // Login Exitoso: Modificamos la lista
     const usuariosActualizados = usuariosFrescos.map((u) => {
       if (
         u.email &&
@@ -117,13 +117,13 @@ function LoginForm() {
       return { ...u, isLoggedIn: false };
     });
 
-    // 6. Guardamos
+    //  Guardamos
     localStorage.setItem("usuarios", JSON.stringify(usuariosActualizados));
     setUsuarios(usuariosActualizados);
 
-    // 7. Impactamos el Contexto Global de Autenticación
+    // Impactamos el Contexto Global de Autenticación
     login({
-      email: usuarioEncontrado.email,
+      ...usuarioEncontrado, // <-- Manda todos los campos del perfil actual
       nombre: usuarioEncontrado.nombre || usuarioEncontrado.email.split("@")[0],
       rol: usuarioEncontrado.rol || "user",
     });
@@ -259,20 +259,12 @@ function LoginForm() {
 
           {/* Redes Sociales */}
           <Row className="g-3 mb-4">
-            <Col xs={6}>
+            <Col xs={12}>
               <Button
                 variant="outline-secondary"
                 className="w-100 d-flex align-items-center justify-content-center gap-2 bg-transparent text-dark border-light-subtle py-2 small fw-semibold "
               >
                 <FcGoogle size={18} /> Google
-              </Button>
-            </Col>
-            <Col xs={6}>
-              <Button
-                variant="outline-secondary"
-                className="w-100 d-flex align-items-center justify-content-center gap-2 bg-transparent text-dark border-light-subtle py-2 small fw-semibold "
-              >
-                <FaApple size={18} /> Apple
               </Button>
             </Col>
           </Row>
