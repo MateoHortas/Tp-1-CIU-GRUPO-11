@@ -30,21 +30,21 @@ function Home({ agregarAlCarrito }) {
           <div className="row g-4">
             <div className="col-12 col-md-6 col-lg-4">
               <CategoryCard
-                title="RUNNING"
+                title="Running"
                 image="https://cdn.runrepeat.com/storage/gallery/buying_guide_primary/269/269-best-daily-running-shoes-15820218-1440.jpg"
               />
             </div>
 
             <div className="col-12 col-md-6 col-lg-4">
               <CategoryCard
-                title="TRAINING"
+                title="Training"
                 image="https://images.unsplash.com/photo-1461896836934-ffe607ba8211"
               />
             </div>
 
             <div className="col-12 col-md-6 col-lg-4">
               <CategoryCard
-                title="LIFESTYLE"
+                title="Lifestyle"
                 image="https://images.unsplash.com/photo-1552346154-21d32810aba3"
               />
             </div>

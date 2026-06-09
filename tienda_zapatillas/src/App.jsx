@@ -15,6 +15,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AboutUS from "./pages/AboutUs";
 import UserContact from "./pages/UserContact";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   const [modoOscuro, setModoOscuro] = useState(false);
@@ -112,7 +113,7 @@ function App() {
             }
           >
             <Navigation />
-
+            <ScrollToTop />
             <Routes>
               <Route
                 path="/"

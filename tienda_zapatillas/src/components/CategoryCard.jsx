@@ -1,8 +1,15 @@
 import "../style/CategoryCard.css";
+import { useNavigate } from "react-router-dom"
 
 function CategoryCard({ image, title }) {
+  const navigate = useNavigate()
+
+  const handleClick = () => {
+    console.log("click")
+    navigate(`/productos?categoria=${title}`)
+  }
   return (
-    <div className="category-card d-flex gap-3">
+    <div className="category-card d-flex gap-3" onClick={handleClick} style={{ cursor: "pointer" }}>
 
       <img
         src={image}
