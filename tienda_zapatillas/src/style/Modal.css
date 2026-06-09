@@ -1,0 +1,16 @@
+.login-btn-submit {
+  background-color: #FF6B00;
+  transition: opacity 0.2s ease;
+  color: white;
+}
+
+.btn-login-main:hover {
+  background-color: #ffb74d; /* Naranja suave/pastel */
+  border-color: #ffb74d;
+  color: white; /* Asegura que el texto siga siendo blanco */
+}
+
+
+.border-naranja-personalizado {
+  border: 1px solid #ff6b00;
+}
