@@ -1,28 +1,12 @@
-import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { CarritoContext } from "../context/CarritoContext";
 
 import "../style/ProductCard.css";
 
-function ProductCard({ producto }) {
+function ProductCard({ producto, agregarAlCarrito }) {
   const { nombre, categoria, precio, imagen, descripcion, stock } = producto;
 
   // Forzar que empiece con '/' para evitar errores de rutas relativas
   const srcImagen = imagen.startsWith("/") ? imagen : `/${imagen}`;
-
-  const { agregarAlCarrito } = useContext(CarritoContext);
-
-  const agregarProducto = () => {
-    const talleAutomatico =
-      producto.talles && producto.talles.length > 0
-        ? producto.talles[0]
-        : "Único";
-
-    agregarAlCarrito({
-      ...producto,
-      talleElegido: talleAutomatico,
-    });
-  };
 
   return (
     <div
@@ -38,7 +22,6 @@ function ProductCard({ producto }) {
         boxShadow: "0 4px 15px rgba(0,0,0,0.3)",
       }}
     >
-      {/* CONTENEDOR DE LA IMAGEN FIJO Y SEGURO */}
       <div
         style={{
           width: "100%",
@@ -62,6 +45,7 @@ function ProductCard({ producto }) {
             display: "block",
           }}
         />
+
         {stock === 0 && (
           <span
             style={{
@@ -82,7 +66,6 @@ function ProductCard({ producto }) {
         )}
       </div>
 
-      {/* CUERPO DE LA TARJETA */}
       <div
         style={{
           padding: "20px",
@@ -93,12 +76,17 @@ function ProductCard({ producto }) {
       >
         <span
           style={{
-            color: "#ff6600",
-            fontSize: "12px",
-            fontWeight: "bold",
+            background: "#ff6600",
+            color: "#fff",
+            fontSize: "11px",
+            fontWeight: "700",
+            padding: "5px 10px",
+            borderRadius: "20px",
+            display: "inline-block",
+            width: "fit-content",
+            marginBottom: "10px",
             textTransform: "uppercase",
             letterSpacing: "1px",
-            marginBottom: "5px",
           }}
         >
           {categoria}
@@ -109,12 +97,22 @@ function ProductCard({ producto }) {
             color: "#ffffff",
             fontSize: "18px",
             fontWeight: "600",
-            margin: "0 0 10px 0",
+            margin: "0 0 5px 0",
             fontFamily: "sans-serif",
           }}
         >
           {nombre}
         </h3>
+
+        <div
+          style={{
+            color: "#ffc107",
+            marginBottom: "10px",
+            fontSize: "14px",
+          }}
+        >
+          ⭐⭐⭐⭐⭐
+        </div>
 
         <p
           style={{
@@ -134,8 +132,8 @@ function ProductCard({ producto }) {
         <div style={{ marginTop: "auto" }}>
           <div
             style={{
-              color: "#ffffff",
-              fontSize: "22px",
+              color: "#ff6600",
+              fontSize: "26px",
               fontWeight: "700",
               marginBottom: "15px",
               fontFamily: "sans-serif",
@@ -164,7 +162,7 @@ function ProductCard({ producto }) {
             <button
               className="btn btn-sm"
               disabled={stock === 0}
-              onClick={agregarProducto}
+              onClick={() => agregarAlCarrito(producto)}
               style={{
                 flex: 1,
                 background: stock === 0 ? "#444" : "#ff6600",
