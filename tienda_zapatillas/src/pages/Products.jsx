@@ -1,7 +1,10 @@
 import ProductCard from "../components/ProductCard";
 import { productos } from "../data/data";
+import { useContext } from "react";
+import { CarritoContext } from "../context/CarritoContext";
 
 function Products() {
+  const { agregarAlCarrito } = useContext(CarritoContext);
   return (
     <div className="container py-5">
       <div className="text-center mb-5">
@@ -14,7 +17,10 @@ function Products() {
       <div className="row g-4">
         {productos.map((producto) => (
           <div key={producto.id} className="col-12 col-sm-6 col-md-4 col-lg-3">
-            <ProductCard producto={producto} />
+            <ProductCard
+              producto={producto}
+              agregarAlCarrito={agregarAlCarrito}
+            />
           </div>
         ))}
       </div>

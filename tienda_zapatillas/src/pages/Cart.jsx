@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CarritoContext } from "../context/CarritoContext";
+import { LoginContext } from "../context/LoginContext";
+import { TemaContext } from "../context/TemaContext";
+import { useNavigate } from "react-router-dom";
+import { ModalLogin } from "../components/ModalLogin";
+import { ModalEnvio } from "../components/ModalEnvio";
 
 import "../style/cart.css";
 
@@ -14,6 +19,27 @@ function Cart() {
     compraRealizada,
   } = useContext(CarritoContext);
 
+  const { usuario } = useContext(LoginContext);
+  const { modoOscuro } = useContext(TemaContext);
+
+  const navigate = useNavigate();
+
+  const [mostrarCartelLogin, setMostrarCartelLogin] = useState(false);
+  const [mostrarCartelEnvio, setMostrarCartelEnvio] = useState(false);
+
+  const handleValidarCompra = () => {
+    if (!usuario) {
+      setMostrarCartelLogin(true);
+    } else {
+      setMostrarCartelEnvio(true);
+    }
+  };
+
+  const handleProcesarCompraFinal = () => {
+    setMostrarCartelEnvio(false);
+    confirmarCompra();
+  };
+
   const total = carrito.reduce(
     (acum, producto) => acum + producto.precio * producto.cantidad,
     0,
@@ -21,10 +47,16 @@ function Cart() {
 
   const productosDistintos = carrito.length;
 
+  const handleNavegacionModal = (ruta) => {
+    setMostrarCartelLogin(false);
+    setMostrarCartelEnvio(false);
+    navigate(ruta);
+  };
+
   return (
     <div className="cart-dark py-5">
       <div className="container">
-        <Link to="/" className="btn btn-back mb-4">
+        <Link to="/productos" className="btn btn-back mb-4">
           ← Seguir comprando
         </Link>
 
@@ -42,7 +74,7 @@ function Cart() {
             <h2>🛒 Tu carrito está vacío</h2>
             <p>Todavía no agregaste productos.</p>
 
-            <Link to="/" className="btn btn-primary-custom mt-3">
+            <Link to="/productos" className="btn btn-primary-custom mt-3">
               Ver productos
             </Link>
           </div>
@@ -122,12 +154,30 @@ function Cart() {
 
               <p className="benefit">✔ Beneficio aplicado</p>
 
-              <button className="btn btn-confirm" onClick={confirmarCompra}>
+              <button className="btn btn-confirm" onClick={handleValidarCompra}>
                 Confirmar compra
               </button>
             </div>
           </>
         )}
+      </div>
+
+      <div className="cart-dark py-5">
+        <ModalLogin
+          show={mostrarCartelLogin}
+          onHide={() => setMostrarCartelLogin(false)}
+          modoOscuro={modoOscuro}
+          onNavegar={handleNavegacionModal}
+        />
+
+        <ModalEnvio
+          show={mostrarCartelEnvio}
+          onHide={() => setMostrarCartelEnvio(false)}
+          usuario={usuario}
+          modoOscuro={modoOscuro}
+          onConfirmar={handleProcesarCompraFinal}
+          onNavegar={handleNavegacionModal}
+        />
       </div>
     </div>
   );

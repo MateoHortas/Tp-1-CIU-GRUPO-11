@@ -62,7 +62,7 @@ function ProductDetail() {
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
         <div style={{ marginBottom: "15px" }}>
           <Link
-            to="/"
+            to="/productos"
             style={{
               color: "#a0a0a0",
               textDecoration: "none",
