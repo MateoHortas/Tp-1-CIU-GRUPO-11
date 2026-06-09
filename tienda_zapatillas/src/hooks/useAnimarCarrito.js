@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 
-export function useAnimarCarrito(cantidadCarrito) {
+export function useAnimarCarrito(unidadesTotales) {
   const [animar, setAnimar] = useState(false);
 
   useEffect(() => {
-    if (cantidadCarrito === 0) return;
+    if (unidadesTotales === 0) return;
 
     let endTimeoutId = null;
     const startTimeoutId = setTimeout(() => {
@@ -16,7 +16,7 @@ export function useAnimarCarrito(cantidadCarrito) {
       clearTimeout(startTimeoutId);
       if (endTimeoutId) clearTimeout(endTimeoutId);
     };
-  }, [cantidadCarrito]);
+  }, [unidadesTotales]);
 
   return animar;
 }

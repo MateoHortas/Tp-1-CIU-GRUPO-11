@@ -1,21 +1,22 @@
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { CarritoContext } from "../context/CarritoContext";
+
 import "../style/cart.css";
 
-function Cart({
-  carrito,
-  eliminarDelCarrito,
-  aumentarCantidad,
-  confirmarCompra,
-  compraRealizada,
-}) {
+function Cart() {
+  const {
+    carrito,
+    unidadesTotales,
+    eliminarDelCarrito,
+    aumentarCantidad,
+    confirmarCompra,
+    compraRealizada,
+  } = useContext(CarritoContext);
+
   const total = carrito.reduce(
     (acum, producto) => acum + producto.precio * producto.cantidad,
-    0
-  );
-
-  const unidadesTotales = carrito.reduce(
-    (acum, producto) => acum + producto.cantidad,
-    0
+    0,
   );
 
   const productosDistintos = carrito.length;
@@ -23,7 +24,6 @@ function Cart({
   return (
     <div className="cart-dark py-5">
       <div className="container">
-
         <Link to="/" className="btn btn-back mb-4">
           ← Seguir comprando
         </Link>
@@ -51,7 +51,6 @@ function Cart({
             {carrito.map((producto) => (
               <div key={producto.id} className="cart-item mb-4">
                 <div className="row align-items-center">
-
                   <div className="col-md-3 text-center mb-3 mb-md-0">
                     <img
                       src={producto.imagen}
@@ -61,21 +60,23 @@ function Cart({
                   </div>
 
                   <div className="col-md-9">
+                    <h3 className="product-title">{producto.nombre}</h3>
 
-                    <h3 className="product-title">
-                      {producto.nombre}
-                    </h3>
-
-                    <p>Precio unitario: ${producto.precio.toLocaleString("es-AR")}</p>
+                    <p>
+                      Precio unitario: $
+                      {producto.precio.toLocaleString("es-AR")}
+                    </p>
 
                     <p>Cantidad: {producto.cantidad}</p>
 
                     <div className="product-total">
-                      ${(producto.precio * producto.cantidad).toLocaleString("es-AR")}
+                      $
+                      {(producto.precio * producto.cantidad).toLocaleString(
+                        "es-AR",
+                      )}
                     </div>
 
                     <div className="d-flex align-items-center gap-2">
-
                       <button
                         className="btn btn-outline-orange"
                         onClick={() => eliminarDelCarrito(producto.id)}
@@ -91,7 +92,6 @@ function Cart({
                       >
                         +
                       </button>
-
                     </div>
                   </div>
                 </div>
@@ -99,11 +99,14 @@ function Cart({
             ))}
 
             <div className="cart-summary">
-
               <h3>📦 Resumen de compra</h3>
 
-              <p>Productos distintos: <strong>{productosDistintos}</strong></p>
-              <p>Unidades totales: <strong>{unidadesTotales}</strong></p>
+              <p>
+                Productos distintos: <strong>{productosDistintos}</strong>
+              </p>
+              <p>
+                Unidades totales: <strong>{unidadesTotales}</strong>
+              </p>
 
               <p>
                 🚚 Envío: <span className="free-shipping">Gratis</span>
@@ -119,10 +122,7 @@ function Cart({
 
               <p className="benefit">✔ Beneficio aplicado</p>
 
-              <button
-                className="btn btn-confirm"
-                onClick={confirmarCompra}
-              >
+              <button className="btn btn-confirm" onClick={confirmarCompra}>
                 Confirmar compra
               </button>
             </div>

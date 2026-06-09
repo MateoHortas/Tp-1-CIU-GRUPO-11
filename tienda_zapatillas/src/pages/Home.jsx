@@ -5,7 +5,12 @@ import ProductCard from "../components/ProductCard";
 
 import { productos } from "../data/data.js";
 
-function Home({ agregarAlCarrito }) {
+import { useContext } from "react";
+import { CarritoContext } from "../context/CarritoContext";
+
+function Home() {
+  const { agregarAlCarrito } = useContext(CarritoContext);
+
   return (
     <>
       <div

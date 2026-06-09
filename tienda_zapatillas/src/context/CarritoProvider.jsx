@@ -4,35 +4,84 @@ import { CarritoContext } from "./CarritoContext";
 export function CarritoProvider({ children }) {
   const [carrito, setCarrito] = useState([]);
 
-  const agregarAlCarrito = (productoNuevo) => {
-    setCarrito((carritoActual) => {
-      const existe = carritoActual.find(
-        (producto) =>
-          producto.id === productoNuevo.id &&
-          producto.talleElegido === productoNuevo.talleElegido,
-      );
+  const [compraRealizada, setCompraRealizada] = useState(false);
 
-      if (existe) {
-        return carritoActual.map((producto) =>
-          producto.id === productoNuevo.id &&
-          producto.talleElegido === productoNuevo.talleElegido
-            ? { ...producto, cantidad: producto.cantidad + 1 }
-            : producto,
-        );
-      } else {
-        return [...carritoActual, { ...productoNuevo, cantidad: 1 }];
-      }
-    });
-  };
-
-  const cantidadCarrito = carrito.reduce(
-    (total, producto) => total + producto.cantidad,
+  const unidadesTotales = carrito.reduce(
+    (acum, producto) => acum + producto.cantidad,
     0,
   );
 
+  const agregarAlCarrito = (producto) => {
+    setCompraRealizada(false);
+
+    const existe = carrito.find((item) => item.id === producto.id);
+
+    if (existe) {
+      setCarrito(
+        carrito.map((item) =>
+          item.id === producto.id
+            ? {
+                ...item,
+                cantidad: item.cantidad + 1,
+              }
+            : item,
+        ),
+      );
+    } else {
+      setCarrito([
+        ...carrito,
+        {
+          ...producto,
+          cantidad: 1,
+        },
+      ]);
+    }
+  };
+
+  const eliminarDelCarrito = (id) => {
+    setCarrito(
+      carrito
+        .map((producto) =>
+          producto.id === id
+            ? {
+                ...producto,
+                cantidad: producto.cantidad - 1,
+              }
+            : producto,
+        )
+        .filter((producto) => producto.cantidad > 0),
+    );
+  };
+
+  const aumentarCantidad = (id) => {
+    setCarrito(
+      carrito.map((producto) =>
+        producto.id === id
+          ? {
+              ...producto,
+              cantidad: producto.cantidad + 1,
+            }
+          : producto,
+      ),
+    );
+  };
+
+  const confirmarCompra = () => {
+    setCompraRealizada(true);
+    setCarrito([]);
+  };
+
   return (
     <CarritoContext.Provider
-      value={{ carrito, cantidadCarrito, agregarAlCarrito }}
+      value={{
+        carrito,
+        compraRealizada,
+        unidadesTotales,
+        agregarAlCarrito,
+        eliminarDelCarrito,
+        aumentarCantidad,
+        confirmarCompra,
+      }}
     >
       {children}
     </CarritoContext.Provider>

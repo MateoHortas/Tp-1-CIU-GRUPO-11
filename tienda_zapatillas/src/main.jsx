@@ -4,8 +4,18 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 
+import { LoginProvider } from "./context/LoginProvider.jsx";
+import { TemaProvider } from "./context/TemaProvider.jsx";
+import { CarritoProvider } from "./context/CarritoProvider.jsx";
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
-    <App />
+    <LoginProvider>
+      <TemaProvider>
+        <CarritoProvider>
+          <App />
+        </CarritoProvider>
+      </TemaProvider>
+    </LoginProvider>
   </BrowserRouter>,
 );
