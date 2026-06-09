@@ -7,6 +7,7 @@ import { LoginProvider } from "./context/LoginProvider";
 
 import Navigation from "./components/Navbar";
 
+import Products from "./pages/Products";
 import Home from "./pages/Home";
 import ProductDetail from "./pages/ProductDetail";
 import Cart from "./pages/Cart";
@@ -167,6 +168,11 @@ function App() {
               <Route
                 path="/contacto"
                 element={<UserContact />}
+              />
+
+              <Route
+                path="/productos"
+                element={<Products />}
               />
             </Routes>
           </div>

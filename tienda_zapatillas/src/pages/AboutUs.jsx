@@ -22,7 +22,7 @@ const AboutUS = () => {
         imagenFondo={heroAtardecer}
         mostrarBoton={true}
         textoBoton="VER TODOS LOS PRODUCTOS"
-        rutaBoton="/catalogo"
+        rutaBoton="/productos"
       />
 
       <Container className="py-5 my-4">
