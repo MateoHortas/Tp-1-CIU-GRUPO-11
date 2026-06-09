@@ -71,13 +71,28 @@ http://localhost:5173
 ![Home](tienda_zapatillas/screenshots/home3.png)
 
 ### Catálogo
-![Catalogo](./screenshots/catalogo.png)
+![Catalogo](tienda_zapatillas/screenshots/catalogo.png)
 
 ### Detalle de Producto
-![Detalle](./screenshots/detalle.png)
+![Detalle](tienda_zapatillas/screenshots/detalleProducto1.png)
+![Detalle](tienda_zapatillas/screenshots/detalleProducto2.png)
 
 ### Carrito
-![Carrito](./screenshots/carrito.png)
+![Carrito](tienda_zapatillas/screenshots/carrito.png)
+
+### Nosotros
+![Nosotros](tienda_zapatillas/screenshots/nosotros1.png)
+![Nosotros](tienda_zapatillas/screenshots/nosotros2.png)
+
+### Contacto
+![Contacto](tienda_zapatillas/screenshots/contacto.png)
+
+### Registro
+![Registro](tienda_zapatillas/screenshots/registro.png)
+
+### Inicio de sesion 
+![InicioDeSesion](tienda_zapatillas/screenshots/inicioDeSesion.png)
+
 
 ---
 

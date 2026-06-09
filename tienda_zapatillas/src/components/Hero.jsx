@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import "../style/Hero.css";
+import heroImage from "../assets/heroImage.jpeg";
 
 function Hero({
   titulo = (
@@ -10,10 +11,10 @@ function Hero({
     </>
   ),
   subtitulo = "",
-  imagenFondo = "/heroImage.jpeg", // Corregido: ya no usa '../public' para evitar la pantalla blanca
+  imagenFondo = heroImage, // Corregido: ya no usa '../public' para evitar la pantalla blanca
   mostrarBoton = true,
   textoBoton = "VER TODOS LOS PRODUCTOS",
-  rutaBoton = "/catalogo",
+  rutaBoton = "/productos",
 }) {
   return (
     <section
