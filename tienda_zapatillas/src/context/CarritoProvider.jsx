@@ -6,7 +6,7 @@ export function CarritoProvider({ children }) {
 
   const [compraRealizada, setCompraRealizada] = useState(false);
 
-  const unidadesTotales = carrito.reduce(
+  const cantidadCarrito = carrito.reduce(
     (acum, producto) => acum + producto.cantidad,
     0,
   );
@@ -76,7 +76,7 @@ export function CarritoProvider({ children }) {
       value={{
         carrito,
         compraRealizada,
-        unidadesTotales,
+        cantidadCarrito,
         agregarAlCarrito,
         eliminarDelCarrito,
         aumentarCantidad,
