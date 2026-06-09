@@ -24,7 +24,7 @@ function Cart({
     <div className="cart-dark py-5">
       <div className="container">
 
-        <Link to="/productos" className="btn btn-back mb-4">
+        <Link to="/" className="btn btn-back mb-4">
           ← Seguir comprando
         </Link>
 

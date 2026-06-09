@@ -4,6 +4,7 @@ import ProductCard from "../components/ProductCard";
 import { CarritoContext } from "../context/CarritoContext";
 import { productos } from "../data/data";
 
+
 function Products() {
   const { agregarAlCarrito } = useContext(CarritoContext);
   const [searchParams, setSearchParams] = useSearchParams()

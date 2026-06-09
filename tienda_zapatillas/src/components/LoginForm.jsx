@@ -244,6 +244,7 @@ function LoginForm() {
             <Button
               type="submit"
               className="w-100 fw-bold py-2 mb-4 d-flex align-items-center justify-content-center gap-2 border-0 rounded-3 login-btn-submit btn-login-main"
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             >
               INICIAR SESIÓN <FiLogIn />
             </Button>

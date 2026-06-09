@@ -11,11 +11,11 @@ import {
   FiTruck,
   FiMessageSquare,
 } from "react-icons/fi";
-import { RiLockPasswordLine } from "react-icons/ri"; // Ícono para confirmar contraseña
+import { RiLockPasswordLine } from "react-icons/ri"; 
 import Alert from "react-bootstrap/Alert";
 import { FcGoogle } from "react-icons/fc";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import "../style/LoginForm.css"; // Reutilizamos los estilos base de colores y botones
+import "../style/LoginForm.css"; 
 import { Link } from "react-router-dom";
 
 function RegisterForm() {
@@ -263,8 +263,8 @@ function RegisterForm() {
               </InputGroup>
             </Form.Group>
 
-            {/* Dirección y Localidad en la misma fila */}
-            {/* Dirección (Suelta con espacio abajo) */}
+            {/* Dirección y Localidad  */}
+            
             <Form.Group className="mb-3" controlId="registerAddress">
               <Form.Label className="fw-semibold text-secondary small">
                 Dirección (Calle y Altura)
@@ -289,7 +289,6 @@ function RegisterForm() {
               </InputGroup>
             </Form.Group>
 
-            {/* Localidad (Suelta con espacio abajo) */}
             <Form.Group className="mb-3" controlId="registerLocation">
               <Form.Label className="fw-semibold text-secondary small">
                 Localidad
@@ -450,6 +449,7 @@ function RegisterForm() {
             <Button
               type="submit"
               className="w-100 fw-bold py-2 mb-4 d-flex align-items-center justify-content-center gap-2 border-0 rounded-3 login-btn-submit btn-login-main"
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             >
               CREAR CUENTA <FiUserPlus />
             </Button>
@@ -459,11 +459,11 @@ function RegisterForm() {
           <div className="position-relative text-center my-4">
             <hr className="text-muted" />
             <span className="position-absolute top-50 start-50 translate-middle bg-white px-3 text-muted fw-semibold login-divider-text">
-              O REGÍSTRATE CON
+               REGISTRATE CON
             </span>
           </div>
 
-          {/* Botones Sociales */}
+         
           <Row className="g-3 mb-4">
             <Col xs={12}>
               <Button

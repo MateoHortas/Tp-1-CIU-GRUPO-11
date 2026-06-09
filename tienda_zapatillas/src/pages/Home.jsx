@@ -4,8 +4,12 @@ import CategoryCard from "../components/CategoryCard";
 import ProductCard from "../components/ProductCard";
 
 import { productos } from "../data/data.js";
+import { useContext } from "react";
+import { CarritoContext } from "../context/CarritoContext";
 
-function Home({ agregarAlCarrito }) {
+function Home() {
+  const { agregarAlCarrito } = useContext(CarritoContext);
+
   return (
     <>
       <div

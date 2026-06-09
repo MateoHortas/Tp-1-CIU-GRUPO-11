@@ -1,14 +1,12 @@
 import { Route, Routes } from "react-router-dom";
 import { useState } from "react";
-
 import { TemaContext } from "./context/TemaContext";
 import { CarritoContext } from "./context/CarritoContext";
 import { LoginProvider } from "./context/LoginProvider";
 
 import Navigation from "./components/Navbar";
-
-import Products from "./pages/Products";
 import Home from "./pages/Home";
+import Products from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
 import Cart from "./pages/Cart";
 import Login from "./pages/Login";
