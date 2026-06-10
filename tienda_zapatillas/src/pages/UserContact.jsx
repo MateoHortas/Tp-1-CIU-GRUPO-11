@@ -20,6 +20,7 @@ import {
 } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { LoginContext } from "../context/LoginContext";
+import "../style/LoginForm.css";
 
 function UserContact() {
   const [usuarios, setUsuarios] = useState([]);
@@ -154,15 +155,15 @@ function UserContact() {
   if (!usuarioLogueado) {
     return (
       <Container
-        className="d-flex align-items-center justify-content-center"
+        className="d-flex align-items-center justify-content-center "
         style={{ minHeight: "70vh" }}
       >
         <Card
-          className="shadow-sm border-0 p-4 text-center rounded-4 mx-auto"
+          className="shadow-sm border-0 p-4 text-center rounded-4 mx-auto border-naranja-personalizado "
           style={{ maxWidth: "450px" }}
         >
           <Card.Body>
-            <div className="mb-4">
+            <div className="mb-4 ">
               <FiUser size={50} className="text-muted mb-3" />
               <h4 className="fw-bold text-dark">Acceso Restringido</h4>
               <p className="text-muted small">
@@ -176,14 +177,13 @@ function UserContact() {
             <div className="d-flex gap-2 justify-content-center mt-4">
               <Link
                 to="/login"
-                className="btn btn-outline-secondary px-4 rounded-3 btn-login-main text-white bg-dark border-0"
+                className="btn btn-orange  btn-login-main px-4 rounded-3 border-orange text-orange fw-bold"
               >
                 Iniciar Sesión
               </Link>
               <Link
                 to="/register"
-                className="btn btn-outline-orange px-4 rounded-3 border-orange text-orange fw-bold"
-                style={{ borderColor: "#e67e22", color: "#e67e22" }}
+                className="btn btn-orange btn-login-main px-4 rounded-3 border-orange text-orange fw-bold"
               >
                 Registrarse
               </Link>

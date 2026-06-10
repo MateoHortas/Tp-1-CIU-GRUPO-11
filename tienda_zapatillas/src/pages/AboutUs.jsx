@@ -27,26 +27,24 @@ const AboutUS = () => {
 
       <Container className="py-5 my-4">
         <Row className="align-items-center g-5 mb-5">
-          {/* Columna Izquierda: Tarjetas Reutilizables */}
           <Col lg={6} md={12}>
             <Row className="g-4">
               <Col md={12}>
                 <InfoCard
                   titulo="Quiénes Somos"
-                  descripcion="Somos un equipo apasionado de corredores y tecnólogos dedicados a crear la mejor experiencia para la comunidad de running. Buscamos llevar el calzado deportivo al siguiente nivel combinando confort, diseño y rendimiento."
+                  descripcion={`Somos un equipo que dejó todo atrás y decidió emprender en el mundo del calzado para deportistas y amantes del camino. Nuestro objetivo es ofrecer la mejor experiencia para nuestros clientes en la búsqueda de ese par de zapatillas que los van a ayudar a escribir su siguiente historia.Somos el nexo entre el mejor calzado, tus sueños y tus ganas de vivir la vida.`}
                 />
               </Col>
 
               <Col md={12}>
                 <InfoCard
-                  titulo="Pasión por el deporte"
-                  descripcion="Nuestra filosofía se basa en el movimiento constante. Cada par de zapatillas que seleccionamos está pensado para dar soporte, amortiguación y velocidad a tus objetivos, ya sea en tus entrenamientos diarios o cruzando la meta de tu próxima maratón."
+                  titulo="¿Qué nos motiva?"
+                  descripcion={`Cientos de miles de personas avanzan día a día, cada una en su propio camino y desafiando las dificultades de la vida. Nosotros queremos acompañarte en ese trayecto, ofreciéndote las mejores marcas y productos de primera calidad para que nunca te detengas en la búsqueda de lo que tanto anhelas.Porque tu camino también es el nuestro.`}
                 />
               </Col>
             </Row>
           </Col>
 
-          {/* Columna Derecha: Imagen de las Zapatillas (Alta Calidad) */}
           <Col lg={6} md={12} className="text-center">
             <div className="shadow-lg rounded-4 overflow-hidden">
               <Image
