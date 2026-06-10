@@ -1,9 +1,34 @@
 import { Link } from "react-router-dom";
+import { FiHeart } from "react-icons/fi";
+import { FaHeart } from "react-icons/fa";
+import { useContext } from "react";
+import { FavoritosContext } from "../context/FavoritosContext";
+import { LoginContext } from "../context/LoginContext";
 
 import "../style/ProductCard.css";
 
 function ProductCard({ producto, agregarAlCarrito }) {
   const { nombre, categoria, precio, imagen, descripcion, stock } = producto;
+  const { usuario } = useContext(LoginContext);
+
+  const {
+    agregarAFavoritos,
+    eliminarFavorito,
+    esFavorito,
+  } = useContext(FavoritosContext);
+
+  const toggleFavorito = () => {
+    if(!usuario){
+      alert("Debes iniciar sesion para agregar favoritos")
+      return
+    }
+
+    if (esFavorito(producto.id)) {
+      eliminarFavorito(producto.id);
+    } else {
+      agregarAFavoritos(producto);
+  }
+  }
 
   // Forzar que empiece con '/' para evitar errores de rutas relativas
   const srcImagen = imagen.startsWith("/") ? imagen : `/${imagen}`;
@@ -34,6 +59,27 @@ function ProductCard({ producto, agregarAlCarrito }) {
           position: "relative",
         }}
       >
+        <button
+          onClick={toggleFavorito}
+          style={{
+            position: "absolute",
+            top: "10px",
+            left: "10px",
+            border: "none",
+            background: "rgba(255,255,255,0.9)",
+            borderRadius: "50%",
+            width: "40px",
+            height: "40px",
+            cursor: "pointer",
+            zIndex: 3,
+          }}
+        >
+          {esFavorito(producto.id) ? (
+            <FaHeart color="red" />
+          ) : (
+            <FiHeart />
+          )}
+        </button>
         <img
           src={srcImagen}
           alt={nombre}

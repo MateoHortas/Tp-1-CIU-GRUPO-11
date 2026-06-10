@@ -7,6 +7,7 @@ import {
   FiShoppingCart,
   FiUser,
   FiLogOut,
+  FiHeart
 } from "react-icons/fi";
 import { TemaContext } from "../context/TemaContext";
 import { CarritoContext } from "../context/CarritoContext";
@@ -73,6 +74,14 @@ function Navigation() {
             {cantidadCarrito > 0 && (
               <span className="numero-carrito">{cantidadCarrito}</span>
             )}
+          </Nav.Link>
+
+          <Nav.Link
+            as={NavLink}
+            to="/favoritos"
+            className="btn-nav-icono"
+          >
+            <FiHeart />
           </Nav.Link>
         </div>
 

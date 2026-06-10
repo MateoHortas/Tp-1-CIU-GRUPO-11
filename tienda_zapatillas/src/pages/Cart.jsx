@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import "../style/cart.css";
+import { useState } from "react";
 
 function Cart({
   carrito,
@@ -8,17 +9,61 @@ function Cart({
   confirmarCompra,
   compraRealizada,
 }) {
-  const total = carrito.reduce(
-    (acum, producto) => acum + producto.precio * producto.cantidad,
-    0
-  );
+  
 
   const unidadesTotales = carrito.reduce(
     (acum, producto) => acum + producto.cantidad,
     0
   );
 
+
   const productosDistintos = carrito.length;
+
+  const [codigoPromo, setCodigoPromo] = useState("");
+  const [descuento, setDescuento] = useState(0);
+  const [mensajePromo, setMensajePromo] = useState("");
+  const [promoAplicada, setPromoAplicada] = useState(false);
+
+  const codigosPromocionales = {
+    TRIATLON10: 10,
+    TRIATLON20: 20,
+    BIENVENIDO: 15,
+  };
+
+  const total = carrito.reduce(
+    (acum, producto) => acum + producto.precio * producto.cantidad,
+    0
+  );
+
+  const montoDescuento = total * (descuento / 100);
+
+  const totalFinal = total - montoDescuento;
+  
+  const aplicarCodigo = () => {
+      if (promoAplicada) {
+        setMensajePromo("Ya se aplicó un código promocional.");
+        return;
+      }
+      const codigo = codigoPromo.trim().toUpperCase();
+
+      if (codigosPromocionales[codigo]) {
+        setDescuento(codigosPromocionales[codigo]);
+        setMensajePromo(
+          `Código aplicado: ${codigosPromocionales[codigo]}% de descuento`
+        );
+        setPromoAplicada(true)
+      } else {
+        setDescuento(0);
+        setMensajePromo("Código inválido");
+      }
+  };
+
+  const cancelarCodigo = () => {
+    setCodigoPromo("");
+    setDescuento(0);
+    setMensajePromo("");
+    setPromoAplicada(false);
+  };
 
   return (
     <div className="cart-dark py-5">
@@ -111,17 +156,96 @@ function Cart({
 
               <hr />
 
-              <p className="total-label">TOTAL</p>
+              <p className="total-label">SUBTOTAL</p>
 
               <div className="total-price">
                 ${total.toLocaleString("es-AR")}
               </div>
 
-              <p className="benefit">✔ Beneficio aplicado</p>
+              {descuento > 0 && (
+                  <p className="mt-3">
+                    Descuento ({descuento}%):
+                    <strong className="text-success">
+                      {" "}
+                      -${montoDescuento.toLocaleString("es-AR")}
+                    </strong>
+                  </p>
+                )}
 
+                <p className="total-label mt-3">
+                  TOTAL FINAL
+                </p>
+
+                <div className="total-price text-success">
+                  ${totalFinal.toLocaleString("es-AR")}
+                </div>
+
+              {descuento > 0 && (
+                <p className="benefit">✔ Beneficio aplicado</p>
+              )}
+              
+              <div className="promo-section">
+                <div className="promo-header">
+                  <h4>
+                    Código promocional
+
+                    {promoAplicada && (
+                      <button
+                        className="btn-cancel-promo"
+                        onClick={cancelarCodigo}
+                        title="Cancelar código"
+                      >
+                        ✕
+                      </button>
+                    )}
+                  </h4>
+                </div>
+
+                  <input
+                    type="text"
+                    value={codigoPromo}
+                    onChange={(e) => setCodigoPromo(e.target.value)}
+                    placeholder="Ingrese un código"
+                    disabled={promoAplicada}
+                  />
+                <button
+                  className="btn-aplicar-promo"
+                  onClick={aplicarCodigo}
+                  disabled={promoAplicada}
+                >
+                  Aplicar
+                </button>
+
+                <div className="promo-codigos">
+                  <p>Códigos de prueba:</p>
+                  <ul>
+                    <li>TRIATLON10 → 10%</li>
+                    <li>TRIATLON20 → 20%</li>
+                    <li>BIENVENIDO → 15%</li>
+                  </ul>
+                </div>
+
+                {mensajePromo && (
+                  <p
+                    className={
+                      mensajePromo.includes("aplicado")
+                        ? "promo-exito"
+                        : "promo-error"
+                    }
+                  >
+                    {mensajePromo}
+                  </p>
+                )}
+            </div>
               <button
                 className="btn btn-confirm"
-                onClick={confirmarCompra}
+                onClick={() => {
+                  confirmarCompra();
+                  setCodigoPromo("");
+                  setDescuento(0);
+                  setMensajePromo("");
+                  setPromoAplicada(false);
+                }}
               >
                 Confirmar compra
               </button>

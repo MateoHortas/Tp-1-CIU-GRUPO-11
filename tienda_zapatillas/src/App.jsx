@@ -4,6 +4,8 @@ import { useState } from "react";
 import { TemaContext } from "./context/TemaContext";
 import { CarritoContext } from "./context/CarritoContext";
 import { LoginProvider } from "./context/LoginProvider";
+import { FavoritosProvider } from "./context/FavoritosProvider";
+
 
 import Navigation from "./components/Navbar";
 
@@ -16,6 +18,7 @@ import Register from "./pages/Register";
 import AboutUS from "./pages/AboutUs";
 import UserContact from "./pages/UserContact";
 import ScrollToTop from "./components/ScrollToTop";
+import Favoritos from "./pages/Favorites";
 
 function App() {
   const [modoOscuro, setModoOscuro] = useState(false);
@@ -95,90 +98,93 @@ function App() {
 
   return (
     <LoginProvider>
-      <TemaContext.Provider
-        value={{ modoOscuro, cambiarTema }}
-      >
-        <CarritoContext.Provider
-          value={{
-            carrito,
-            cantidadCarrito,
-            agregarAlCarrito,
-          }}
+      <FavoritosProvider>
+        <TemaContext.Provider
+          value={{ modoOscuro, cambiarTema }}
         >
-          <div
-            className={
-              modoOscuro
-                ? "modo-oscuro-activo"
-                : ""
-            }
+          <CarritoContext.Provider
+            value={{
+              carrito,
+              cantidadCarrito,
+              agregarAlCarrito,
+            }}
           >
-            <Navigation />
-            <ScrollToTop />
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <Home
-                    agregarAlCarrito={agregarAlCarrito}
-                    carrito={carrito}
-                  />
-                }
-              />
+            <div
+              className={
+                modoOscuro
+                  ? "modo-oscuro-activo"
+                  : ""
+              }
+            >
+              <Navigation />
+              <ScrollToTop />
+              <Routes>
+                <Route
+                  path="/"
+                  element={
+                    <Home
+                      agregarAlCarrito={agregarAlCarrito}
+                      carrito={carrito}
+                    />
+                  }
+                />
 
-              <Route
-                path="/producto/:id"
-                element={<ProductDetail />}
-              />
+                <Route
+                  path="/producto/:id"
+                  element={<ProductDetail />}
+                />
 
-              <Route
-                path="/carrito"
-                element={
-                  <Cart
-                    carrito={carrito}
-                    eliminarDelCarrito={
-                      eliminarDelCarrito
-                    }
-                    aumentarCantidad={
-                      aumentarCantidad
-                    }
-                    confirmarCompra={
-                      confirmarCompra
-                    }
-                    compraRealizada={
-                      compraRealizada
-                    }
-                  />
-                }
-              />
+                <Route
+                  path="/carrito"
+                  element={
+                    <Cart
+                      carrito={carrito}
+                      eliminarDelCarrito={
+                        eliminarDelCarrito
+                      }
+                      aumentarCantidad={
+                        aumentarCantidad
+                      }
+                      confirmarCompra={
+                        confirmarCompra
+                      }
+                      compraRealizada={
+                        compraRealizada
+                      }
+                    />
+                  }
+                />
 
-              <Route
-                path="/login"
-                element={<Login />}
-              />
+                <Route
+                  path="/login"
+                  element={<Login />}
+                />
 
-              <Route
-                path="/register"
-                element={<Register />}
-              />
+                <Route
+                  path="/register"
+                  element={<Register />}
+                />
 
-              <Route
-                path="/nosotros"
-                element={<AboutUS />}
-              />
+                <Route
+                  path="/nosotros"
+                  element={<AboutUS />}
+                />
 
-              <Route
-                path="/contacto"
-                element={<UserContact />}
-              />
+                <Route
+                  path="/contacto"
+                  element={<UserContact />}
+                />
 
-              <Route
-                path="/productos"
-                element={<Products />}
-              />
-            </Routes>
-          </div>
-        </CarritoContext.Provider>
-      </TemaContext.Provider>
+                <Route
+                  path="/productos"
+                  element={<Products />}
+                />
+                <Route path="/favoritos" element={<Favoritos />} />
+              </Routes>
+            </div>
+          </CarritoContext.Provider>
+        </TemaContext.Provider>
+      </FavoritosProvider>
     </LoginProvider>
   );
 }
