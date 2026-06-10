@@ -65,9 +65,11 @@ function Cart() {
     0,
   );
 
+  const envio = total >= 150000 ? 0 : total * 0.05;
+
   const montoDescuento = total * (descuento / 100);
 
-  const totalFinal = total - montoDescuento;
+  const totalFinal = total - montoDescuento + envio;
 
   const aplicarCodigo = () => {
     if (promoAplicada) {
@@ -189,7 +191,7 @@ function Cart() {
               </p>
 
               <p>
-                🚚 Envío: <span className="free-shipping">Gratis</span>
+                🚚 Envío: <span className="free-shipping">{envio === 0 ? "Gratis" : `$${envio.toLocaleString("es-AR")}` }</span>
               </p>
 
               <hr />
@@ -299,5 +301,6 @@ function Cart() {
     </div>
   );
 }
+
 
 export default Cart;

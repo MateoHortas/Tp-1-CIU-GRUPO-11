@@ -77,6 +77,10 @@ http://localhost:5173
 ![Detalle](tienda_zapatillas/screenshots/detalleProducto1.png)
 ![Detalle](tienda_zapatillas/screenshots/detalleProducto2.png)
 
+### Favoritos
+![Favoritos](tienda_zapatillas/screenshots/favoritos1.png)
+![Favoritos](tienda_zapatillas/screenshots/favoritos2.png)
+
 ### Carrito
 ![Carrito](tienda_zapatillas/screenshots/carrito.png)
 
