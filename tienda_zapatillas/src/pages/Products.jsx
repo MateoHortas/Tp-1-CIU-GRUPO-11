@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
 import { CarritoContext } from "../context/CarritoContext";
@@ -14,6 +14,17 @@ function Products() {
   const [talleSeleccionado, setTalleSeleccionado] = useState("Todos");
   const [precioMaximo, setPrecioMaximo] = useState(300000);
 
+  // Estado para detectar si es pantalla de PC (ancho mayor a 991px de Bootstrap)
+  const [esPantallaGrande, setEsPantallaGrande] = useState(window.innerWidth > 991);
+
+  useEffect(() => {
+    const controlarResizing = () => {
+      setEsPantallaGrande(window.innerWidth > 991);
+    };
+    window.addEventListener("resize", controlarResizing);
+    return () => window.removeEventListener("resize", controlarResizing);
+  }, []);
+
   const zapatillasFiltradas = productos.filter((p) => {
     const categoria =
       categoriaSeleccionada === "Todas" ||
@@ -24,6 +35,16 @@ function Products() {
 
     return categoria && talle && precio;
   });
+
+  // Objeto de estilos dinámico para el panel de filtros
+  const estilosFiltros = {
+    position: "sticky",
+    top: "100px",
+    // Si es PC, limita la altura al alto de pantalla menos la Navbar y activa la ruedita (scroll)
+    maxHeight: esPantallaGrande ? "calc(100vh - 140px)" : "none",
+    overflowY: esPantallaGrande ? "auto" : "visible",
+    paddingRight: esPantallaGrande ? "10px" : "0px"
+  };
 
   return (
     <div
@@ -47,15 +68,13 @@ function Products() {
           {/* PANEL DE FILTROS */}
           <div className="col-lg-3 mb-4">
             <div
-         
               className={`${modoOscuro ? "bg-dark text-white" : "bg-white"} p-4 rounded shadow-sm`}
-              style={{ position: "sticky", top: "100px" }}
+              style={estilosFiltros}
             >
               <h4 className="mb-4">Filtros</h4>
 
               <h6>Categoría</h6>
               <div className="d-flex flex-column gap-2 mb-4">
-                
                 <button
                   className={`btn ${modoOscuro ? "btn-outline-light" : "btn-outline-dark"}`}
                   onClick={() => setSearchParams({ categoria: "Todas" })}
@@ -132,7 +151,6 @@ function Products() {
             <div className="row g-4">
               {zapatillasFiltradas.map((producto) => (
                 <div key={producto.id} className="col-12 col-sm-6 col-xl-4">
-                  {/* Nota: Asegurate de que dentro de ProductCard también manejes el modoOscuro si es necesario */}
                   <ProductCard
                     producto={producto}
                     agregarAlCarrito={agregarAlCarrito}
