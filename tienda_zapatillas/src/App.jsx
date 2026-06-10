@@ -5,7 +5,6 @@ import { CarritoContext } from "./context/CarritoContext";
 import { LoginProvider } from "./context/LoginProvider";
 import { FavoritosProvider } from "./context/FavoritosProvider";
 
-
 import Navigation from "./components/Navbar";
 import Home from "./pages/Home";
 import Products from "./pages/Products";
@@ -30,9 +29,7 @@ function App() {
   const agregarAlCarrito = (producto) => {
     setCompraRealizada(false);
 
-    const existe = carrito.find(
-      (item) => item.id === producto.id
-    );
+    const existe = carrito.find((item) => item.id === producto.id);
 
     if (existe) {
       setCarrito(
@@ -42,8 +39,8 @@ function App() {
                 ...item,
                 cantidad: item.cantidad + 1,
               }
-            : item
-        )
+            : item,
+        ),
       );
     } else {
       setCarrito([
@@ -65,9 +62,9 @@ function App() {
                 ...producto,
                 cantidad: producto.cantidad - 1,
               }
-            : producto
+            : producto,
         )
-        .filter((producto) => producto.cantidad > 0)
+        .filter((producto) => producto.cantidad > 0),
     );
   };
 
@@ -79,8 +76,8 @@ function App() {
               ...producto,
               cantidad: producto.cantidad + 1,
             }
-          : producto
-      )
+          : producto,
+      ),
     );
   };
 
@@ -91,15 +88,13 @@ function App() {
 
   const cantidadCarrito = carrito.reduce(
     (total, producto) => total + producto.cantidad,
-    0
+    0,
   );
 
   return (
     <LoginProvider>
       <FavoritosProvider>
-        <TemaContext.Provider
-          value={{ modoOscuro, cambiarTema }}
-        >
+        <TemaContext.Provider value={{ modoOscuro, cambiarTema }}>
           <CarritoContext.Provider
             value={{
               carrito,
@@ -107,13 +102,7 @@ function App() {
               agregarAlCarrito,
             }}
           >
-            <div
-              className={
-                modoOscuro
-                  ? "modo-oscuro-activo"
-                  : ""
-              }
-            >
+            <div className={modoOscuro ? "modo-oscuro-activo" : ""}>
               <Navigation />
               <ScrollToTop />
               <Routes>
@@ -127,56 +116,30 @@ function App() {
                   }
                 />
 
-                <Route
-                  path="/producto/:id"
-                  element={<ProductDetail />}
-                />
+                <Route path="/producto/:id" element={<ProductDetail />} />
 
                 <Route
                   path="/carrito"
                   element={
                     <Cart
                       carrito={carrito}
-                      eliminarDelCarrito={
-                        eliminarDelCarrito
-                      }
-                      aumentarCantidad={
-                        aumentarCantidad
-                      }
-                      confirmarCompra={
-                        confirmarCompra
-                      }
-                      compraRealizada={
-                        compraRealizada
-                      }
+                      eliminarDelCarrito={eliminarDelCarrito}
+                      aumentarCantidad={aumentarCantidad}
+                      confirmarCompra={confirmarCompra}
+                      compraRealizada={compraRealizada}
                     />
                   }
                 />
 
-                <Route
-                  path="/login"
-                  element={<Login />}
-                />
+                <Route path="/login" element={<Login />} />
 
-                <Route
-                  path="/register"
-                  element={<Register />}
-                />
+                <Route path="/register" element={<Register />} />
 
-                <Route
-                  path="/nosotros"
-                  element={<AboutUS />}
-                />
+                <Route path="/nosotros" element={<AboutUS />} />
 
-                <Route
-                  path="/contacto"
-                  element={<UserContact />}
-                />
+                <Route path="/contacto" element={<UserContact />} />
 
-                <Route
-                  path="/productos"
-                  element={<Products />}
-                />
+                <Route path="/productos" element={<Products />} />
                 <Route path="/favoritos" element={<Favoritos />} />
               </Routes>
             </div>
