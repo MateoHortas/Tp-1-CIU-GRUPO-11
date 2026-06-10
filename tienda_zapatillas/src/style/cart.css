@@ -99,3 +99,132 @@
   background: #1b1b1b;
   border-radius: 16px;
 }
+
+.promo-section {
+  margin-top: 20px;
+}
+
+.promo-section h4 {
+  color: #fff;
+  margin-bottom: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.promo-section input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #333;
+  border-radius: 10px;
+  background-color: #1b1b1b;
+  color: white;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.promo-section input::placeholder {
+  color: #888;
+}
+
+.promo-section input:focus {
+  border-color: #ff6b00;
+  box-shadow: 0 0 12px rgba(255, 107, 0, 0.35);
+}
+
+.promo-section input:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.btn-aplicar-promo {
+  margin-top: 10px;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #ff6b00, #ff8c00);
+  color: white;
+  font-weight: 600;
+}
+
+.promo-section button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 107, 0, 0.4);
+}
+
+.promo-section button:disabled {
+  background: #555;
+  cursor: not-allowed;
+}
+
+.promo-codigos {
+  margin-top: 12px;
+  padding: 12px;
+  background: rgba(255, 107, 0, 0.08);
+  border-left: 4px solid #ff6b00;
+  border-radius: 8px;
+}
+
+.promo-codigos ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.promo-exito {
+  margin-top: 10px;
+  color: #4caf50;
+  font-weight: 600;
+}
+
+.promo-error {
+  margin-top: 10px;
+  color: #ff5252;
+  font-weight: 600;
+}
+
+.promo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.promo-header h4 {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.btn-cancel-promo {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  border: 1px solid #ff5252;
+
+  background: transparent;
+  color: #ff5252;
+
+  font-size: 0.75rem;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  flex-shrink: 0;
+}
+
+.btn-cancel-promo:hover {
+  background: #ff5252;
+  color: white;
+  transform: scale(1.1);
+}
