@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import "../style/cart.css";
 import { useState } from "react";
 
+
 function Cart({
   carrito,
   eliminarDelCarrito,
@@ -9,7 +10,7 @@ function Cart({
   confirmarCompra,
   compraRealizada,
 }) {
-  
+
 
   const unidadesTotales = carrito.reduce(
     (acum, producto) => acum + producto.cantidad,
@@ -87,7 +88,7 @@ function Cart({
             <h2>🛒 Tu carrito está vacío</h2>
             <p>Todavía no agregaste productos.</p>
 
-            <Link to="/" className="btn btn-primary-custom mt-3">
+            <Link to="/productos" className="btn btn-primary-custom mt-3">
               Ver productos
             </Link>
           </div>
