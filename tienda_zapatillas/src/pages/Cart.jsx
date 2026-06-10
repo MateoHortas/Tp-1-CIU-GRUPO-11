@@ -1,62 +1,30 @@
 import { Link } from "react-router-dom";
-import { useContext, useState } from "react";
-import { CarritoContext } from "../context/CarritoContext";
-import { LoginContext } from "../context/LoginContext";
-import { TemaContext } from "../context/TemaContext";
-import { useNavigate } from "react-router-dom";
-import { ModalLogin } from "../components/ModalLogin";
-import { ModalEnvio } from "../components/ModalEnvio";
-
 import "../style/cart.css";
 
-function Cart() {
-  const {
-    carrito,
-    unidadesTotales,
-    eliminarDelCarrito,
-    aumentarCantidad,
-    confirmarCompra,
-    compraRealizada,
-  } = useContext(CarritoContext);
-
-  const { usuario } = useContext(LoginContext);
-  const { modoOscuro } = useContext(TemaContext);
-
-  const navigate = useNavigate();
-
-  const [mostrarCartelLogin, setMostrarCartelLogin] = useState(false);
-  const [mostrarCartelEnvio, setMostrarCartelEnvio] = useState(false);
-
-  const handleValidarCompra = () => {
-    if (!usuario) {
-      setMostrarCartelLogin(true);
-    } else {
-      setMostrarCartelEnvio(true);
-    }
-  };
-
-  const handleProcesarCompraFinal = () => {
-    setMostrarCartelEnvio(false);
-    confirmarCompra();
-  };
-
+function Cart({
+  carrito,
+  eliminarDelCarrito,
+  aumentarCantidad,
+  confirmarCompra,
+  compraRealizada,
+}) {
   const total = carrito.reduce(
     (acum, producto) => acum + producto.precio * producto.cantidad,
-    0,
+    0
+  );
+
+  const unidadesTotales = carrito.reduce(
+    (acum, producto) => acum + producto.cantidad,
+    0
   );
 
   const productosDistintos = carrito.length;
 
-  const handleNavegacionModal = (ruta) => {
-    setMostrarCartelLogin(false);
-    setMostrarCartelEnvio(false);
-    navigate(ruta);
-  };
-
   return (
     <div className="cart-dark py-5">
       <div className="container">
-        <Link to="/productos" className="btn btn-back mb-4">
+
+        <Link to="/" className="btn btn-back mb-4">
           ← Seguir comprando
         </Link>
 
@@ -74,7 +42,7 @@ function Cart() {
             <h2>🛒 Tu carrito está vacío</h2>
             <p>Todavía no agregaste productos.</p>
 
-            <Link to="/productos" className="btn btn-primary-custom mt-3">
+            <Link to="/" className="btn btn-primary-custom mt-3">
               Ver productos
             </Link>
           </div>
@@ -83,6 +51,7 @@ function Cart() {
             {carrito.map((producto) => (
               <div key={producto.id} className="cart-item mb-4">
                 <div className="row align-items-center">
+
                   <div className="col-md-3 text-center mb-3 mb-md-0">
                     <img
                       src={producto.imagen}
@@ -92,23 +61,21 @@ function Cart() {
                   </div>
 
                   <div className="col-md-9">
-                    <h3 className="product-title">{producto.nombre}</h3>
 
-                    <p>
-                      Precio unitario: $
-                      {producto.precio.toLocaleString("es-AR")}
-                    </p>
+                    <h3 className="product-title">
+                      {producto.nombre}
+                    </h3>
+
+                    <p>Precio unitario: ${producto.precio.toLocaleString("es-AR")}</p>
 
                     <p>Cantidad: {producto.cantidad}</p>
 
                     <div className="product-total">
-                      $
-                      {(producto.precio * producto.cantidad).toLocaleString(
-                        "es-AR",
-                      )}
+                      ${(producto.precio * producto.cantidad).toLocaleString("es-AR")}
                     </div>
 
                     <div className="d-flex align-items-center gap-2">
+
                       <button
                         className="btn btn-outline-orange"
                         onClick={() => eliminarDelCarrito(producto.id)}
@@ -124,6 +91,7 @@ function Cart() {
                       >
                         +
                       </button>
+
                     </div>
                   </div>
                 </div>
@@ -131,14 +99,11 @@ function Cart() {
             ))}
 
             <div className="cart-summary">
+
               <h3>📦 Resumen de compra</h3>
 
-              <p>
-                Productos distintos: <strong>{productosDistintos}</strong>
-              </p>
-              <p>
-                Unidades totales: <strong>{unidadesTotales}</strong>
-              </p>
+              <p>Productos distintos: <strong>{productosDistintos}</strong></p>
+              <p>Unidades totales: <strong>{unidadesTotales}</strong></p>
 
               <p>
                 🚚 Envío: <span className="free-shipping">Gratis</span>
@@ -154,30 +119,15 @@ function Cart() {
 
               <p className="benefit">✔ Beneficio aplicado</p>
 
-              <button className="btn btn-confirm" onClick={handleValidarCompra}>
+              <button
+                className="btn btn-confirm"
+                onClick={confirmarCompra}
+              >
                 Confirmar compra
               </button>
             </div>
           </>
         )}
-      </div>
-
-      <div className="cart-dark py-5">
-        <ModalLogin
-          show={mostrarCartelLogin}
-          onHide={() => setMostrarCartelLogin(false)}
-          modoOscuro={modoOscuro}
-          onNavegar={handleNavegacionModal}
-        />
-
-        <ModalEnvio
-          show={mostrarCartelEnvio}
-          onHide={() => setMostrarCartelEnvio(false)}
-          usuario={usuario}
-          modoOscuro={modoOscuro}
-          onConfirmar={handleProcesarCompraFinal}
-          onNavegar={handleNavegacionModal}
-        />
       </div>
     </div>
   );

@@ -32,7 +32,7 @@ function ProductDetail() {
       >
         <h2>Producto no encontrado</h2>
         <Link
-          to="/"
+          to="/productos"
           style={{
             color: "#ff6600",
             textDecoration: "none",

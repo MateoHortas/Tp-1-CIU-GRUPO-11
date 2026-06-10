@@ -18,11 +18,11 @@ import "../style/Navbar.css";
 function Navigation() {
   const { modoOscuro, cambiarTema } = useContext(TemaContext);
 
-  const { unidadesTotales } = useContext(CarritoContext);
+  const { cantidadCarrito } = useContext(CarritoContext);
 
   const { usuario, logout } = useContext(LoginContext);
 
-  const animar = useAnimarCarrito(unidadesTotales);
+  const animar = useAnimarCarrito(cantidadCarrito);
 
   const [expandido, setExpandido] = useState(false);
 
@@ -70,8 +70,8 @@ function Navigation() {
           >
             <FiShoppingCart strokeWidth={1.8} />
 
-            {unidadesTotales > 0 && (
-              <span className="numero-carrito">{unidadesTotales}</span>
+            {cantidadCarrito  > 0 && (
+              <span className="numero-carrito">{cantidadCarrito }</span>
             )}
           </Nav.Link>
         </div>
