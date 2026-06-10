@@ -1,0 +1,49 @@
+/* Fondo */
+.favorites-page {
+  min-height: 100vh;
+  background: #f4ECE7;
+  color: 222;
+}
+
+/* Título */
+.favorites-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+/* Línea naranja */
+.orange-line {
+  width: 100px;
+  height: 4px;
+  background: #ff6b00;
+  margin: 0 auto 40px;
+  border-radius: 20px;
+}
+
+/* Grid */
+.favorites-grid {
+  margin-top: 20px;
+}
+
+/* Estado vacío */
+.empty-favorites {
+  max-width: 600px;
+  margin: 50px auto;
+  text-align: center;
+  background: #1b1b1b;
+  border: 1px solid #2d2d2d;
+  border-radius: 16px;
+  padding: 40px;
+}
+
+.empty-favorites h3 {
+  color: #ff6b00;
+  margin-bottom: 15px;
+}
+
+.empty-favorites p {
+  color: #bdbdbd;
+  margin: 0;
+}

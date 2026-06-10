@@ -5,11 +5,16 @@ import { useContext } from "react";
 import { FavoritosContext } from "../context/FavoritosContext";
 import { LoginContext } from "../context/LoginContext";
 
+import { useNavigate } from "react-router-dom";
+
+
 import "../style/ProductCard.css";
 
 function ProductCard({ producto, agregarAlCarrito }) {
   const { nombre, categoria, precio, imagen, descripcion, stock } = producto;
   const { usuario } = useContext(LoginContext);
+
+  const navigate = useNavigate();
 
   const {
     agregarAFavoritos,
@@ -17,23 +22,28 @@ function ProductCard({ producto, agregarAlCarrito }) {
     esFavorito,
   } = useContext(FavoritosContext);
 
-  const toggleFavorito = () => {
-    if(!usuario){
-      alert("Debes iniciar sesion para agregar favoritos")
-      return
-    }
+  const handleFavorito = () => {
+      if (!usuario) {
+        alert("Debes iniciar sesion para añadir a favoritos")
+        setTimeout(() => {
+          navigate("/login");
+        }, 1000);
 
-    if (esFavorito(producto.id)) {
-      eliminarFavorito(producto.id);
-    } else {
-      agregarAFavoritos(producto);
-  }
+        return;
+      }
+
+      if (esFavorito(producto.id)) {
+        eliminarFavorito(producto.id);
+      } else {
+        agregarAFavoritos(producto);
+    };
   }
 
   // Forzar que empiece con '/' para evitar errores de rutas relativas
   const srcImagen = imagen.startsWith("/") ? imagen : `/${imagen}`;
 
   return (
+
     <div
       className="product-card"
       style={{
@@ -60,7 +70,7 @@ function ProductCard({ producto, agregarAlCarrito }) {
         }}
       >
         <button
-          onClick={toggleFavorito}
+          onClick={handleFavorito}
           style={{
             position: "absolute",
             top: "10px",
