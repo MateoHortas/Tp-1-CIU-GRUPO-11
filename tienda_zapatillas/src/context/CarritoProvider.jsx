@@ -3,37 +3,30 @@ import { CarritoContext } from "./CarritoContext";
 
 export function CarritoProvider({ children }) {
   const [carrito, setCarrito] = useState([]);
-
   const [compraRealizada, setCompraRealizada] = useState(false);
 
-  const cantidadCarrito = carrito.reduce(
+  
+  const unidadesTotales = carrito.reduce(
     (acum, producto) => acum + producto.cantidad,
     0,
   );
 
   const agregarAlCarrito = (producto) => {
     setCompraRealizada(false);
-
     const existe = carrito.find((item) => item.id === producto.id);
 
     if (existe) {
       setCarrito(
         carrito.map((item) =>
           item.id === producto.id
-            ? {
-                ...item,
-                cantidad: item.cantidad + 1,
-              }
+            ? { ...item, cantidad: item.cantidad + 1 }
             : item,
         ),
       );
     } else {
       setCarrito([
         ...carrito,
-        {
-          ...producto,
-          cantidad: 1,
-        },
+        { ...producto, cantidad: 1 },
       ]);
     }
   };
@@ -43,10 +36,7 @@ export function CarritoProvider({ children }) {
       carrito
         .map((producto) =>
           producto.id === id
-            ? {
-                ...producto,
-                cantidad: producto.cantidad - 1,
-              }
+            ? { ...producto, cantidad: producto.cantidad - 1 }
             : producto,
         )
         .filter((producto) => producto.cantidad > 0),
@@ -57,10 +47,7 @@ export function CarritoProvider({ children }) {
     setCarrito(
       carrito.map((producto) =>
         producto.id === id
-          ? {
-              ...producto,
-              cantidad: producto.cantidad + 1,
-            }
+          ? { ...producto, cantidad: producto.cantidad + 1 }
           : producto,
       ),
     );
@@ -76,7 +63,8 @@ export function CarritoProvider({ children }) {
       value={{
         carrito,
         compraRealizada,
-        cantidadCarrito,
+        unidadesTotales, 
+        cantidadCarrito: unidadesTotales, 
         agregarAlCarrito,
         eliminarDelCarrito,
         aumentarCantidad,

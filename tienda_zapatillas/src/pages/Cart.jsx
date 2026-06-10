@@ -1,20 +1,24 @@
 import { Link } from "react-router-dom";
-import "../style/cart.css";
+
 import { useContext, useState } from "react";
 import { LoginContext } from "../context/LoginContext";
 import { TemaContext } from "../context/TemaContext";
 import { useNavigate } from "react-router-dom";
 import { ModalLogin } from "../components/ModalLogin";
 import { ModalEnvio } from "../components/ModalEnvio";
-import ScrollToTop from "../components/ScrollToTop";
+import { CarritoContext } from "../context/CarritoContext";
+import "../style/cart.css";
 
-function Cart({
-  carrito,
-  eliminarDelCarrito,
-  aumentarCantidad,
-  confirmarCompra,
-  compraRealizada,
-}) {
+function Cart() {
+  const {
+    carrito,
+    unidadesTotales,
+    eliminarDelCarrito,
+    aumentarCantidad,
+    confirmarCompra,
+    compraRealizada,
+  } = useContext(CarritoContext);
+
   const { usuario } = useContext(LoginContext);
   const { modoOscuro } = useContext(TemaContext);
 
@@ -34,16 +38,15 @@ function Cart({
   const handleProcesarCompraFinal = () => {
     setMostrarCartelEnvio(false);
     confirmarCompra();
+    setCodigoPromo("");
+    setDescuento(0);
+    setMensajePromo("");
+    setPromoAplicada(false);
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
   };
-
-  const unidadesTotales = carrito.reduce(
-    (acum, producto) => acum + producto.cantidad,
-    0,
-  );
 
   const productosDistintos = carrito.length;
 
@@ -272,11 +275,6 @@ function Cart({
                 className="btn btn-confirm"
                 onClick={() => {
                   handleValidarCompra();
-
-                  setCodigoPromo("");
-                  setDescuento(0);
-                  setMensajePromo("");
-                  setPromoAplicada(false);
                 }}
               >
                 Confirmar compra

@@ -15,8 +15,9 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import Alert from "react-bootstrap/Alert";
 import { FcGoogle } from "react-icons/fc";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import "../style/LoginForm.css"; 
+
 import { Link } from "react-router-dom";
+import "../style/LoginForm.css"; 
 
 function RegisterForm() {
   const [usuarios, setUsuarios] = useState([]);

@@ -31,7 +31,7 @@ const AboutUS = () => {
             <Row className="g-4">
               <Col md={12}>
                 <InfoCard
-                  titulo="Quiénes Somos"
+                  titulo="¿Quiénes Somos?"
                   descripcion={`Somos un equipo que dejó todo atrás y decidió emprender en el mundo del calzado para deportistas y amantes del camino. Nuestro objetivo es ofrecer la mejor experiencia para nuestros clientes en la búsqueda de ese par de zapatillas que los van a ayudar a escribir su siguiente historia.Somos el nexo entre el mejor calzado, tus sueños y tus ganas de vivir la vida.`}
                 />
               </Col>

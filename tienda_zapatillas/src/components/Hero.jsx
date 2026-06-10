@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import "../style/Hero.css";
 import heroImage from "../assets/heroImage.jpeg";
+import "../style/Hero.css";
 
 function Hero({
   titulo = (
@@ -11,7 +11,7 @@ function Hero({
     </>
   ),
   subtitulo = "",
-  imagenFondo = heroImage, // Corregido: ya no usa '../public' para evitar la pantalla blanca
+  imagenFondo = heroImage, 
   mostrarBoton = true,
   textoBoton = "VER TODOS LOS PRODUCTOS",
   rutaBoton = "/productos",
@@ -19,7 +19,7 @@ function Hero({
   return (
     <section
       className="hero"
-      style={{ backgroundImage: `url(${imagenFondo})` }} // Cambia dinámicamente según la página
+      style={{ backgroundImage: `url(${imagenFondo})` }} 
     >
       <div className="hero-overlay">
         <div className="container">
