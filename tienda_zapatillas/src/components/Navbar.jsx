@@ -7,7 +7,7 @@ import {
   FiShoppingCart,
   FiUser,
   FiLogOut,
-  FiHeart
+  FiHeart,
 } from "react-icons/fi";
 import { TemaContext } from "../context/TemaContext";
 import { CarritoContext } from "../context/CarritoContext";
@@ -61,18 +61,17 @@ function Navigation() {
           </div>
         </Navbar.Brand>
 
-        <div className="carrito-flotante-container">
+        <div className="nav-acciones-container">
           <Nav.Link
             as={NavLink}
             to="/carrito"
-            onClick={cerrarMenu}
             className={`btn-nav-icono boton-carrito ${animar ? "animar-carrito" : ""}`}
             aria-label="Carrito de compras"
           >
             <FiShoppingCart strokeWidth={1.8} />
 
-            {cantidadCarrito  > 0 && (
-              <span className="numero-carrito">{cantidadCarrito }</span>
+            {cantidadCarrito > 0 && (
+              <span className="numero-carrito">{cantidadCarrito}</span>
             )}
           </Nav.Link>
 
@@ -80,8 +79,9 @@ function Navigation() {
             as={NavLink}
             to="/favoritos"
             className="btn-nav-icono"
+            aria-label="Favoritos"
           >
-            <FiHeart />
+            <FiHeart strokeWidth={1.8} />
           </Nav.Link>
         </div>
 

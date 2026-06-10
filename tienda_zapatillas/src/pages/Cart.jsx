@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 
 import { useContext, useState } from "react";
 import { LoginContext } from "../context/LoginContext";
-import { TemaContext } from "../context/TemaContext";
 import { useNavigate } from "react-router-dom";
 import { ModalLogin } from "../components/ModalLogin";
 import { ModalEnvio } from "../components/ModalEnvio";
 import { CarritoContext } from "../context/CarritoContext";
+import { FiArrowLeft } from "react-icons/fi";
 import "../style/cart.css";
 
 function Cart() {
@@ -20,7 +20,6 @@ function Cart() {
   } = useContext(CarritoContext);
 
   const { usuario } = useContext(LoginContext);
-  const { modoOscuro } = useContext(TemaContext);
 
   const navigate = useNavigate();
 
@@ -103,13 +102,9 @@ function Cart() {
   };
 
   return (
-    <div className="cart-dark py-5">
+    <div className="cart-page py-5">
       <div className="container">
-        <Link to="/productos" className="btn btn-back mb-4">
-          ← Seguir comprando
-        </Link>
-
-        <h2 className="section-title text-center">TU CARRITO</h2>
+        <h2 className="section-title text-center mt-4">TU CARRITO</h2>
         <div className="orange-line mb-5"></div>
 
         {compraRealizada && (
@@ -123,12 +118,16 @@ function Cart() {
             <h2>🛒 Tu carrito está vacío</h2>
             <p>Todavía no agregaste productos.</p>
 
-            <Link to="/productos" className="btn btn-primary-custom mt-3">
+            <Link to="/productos" className="btn-ver-productos mt-3">
               Ver productos
             </Link>
           </div>
         ) : (
           <>
+            <Link to="/productos" className="btn btn-back mb-4">
+              <FiArrowLeft className="icono-flecha" /> Seguir comprando
+            </Link>
+
             {carrito.map((producto) => (
               <div key={producto.id} className="cart-item mb-4">
                 <div className="row align-items-center">
@@ -283,23 +282,20 @@ function Cart() {
           </>
         )}
       </div>
-      <div className="cart-dark py-5">
-        <ModalLogin
-          show={mostrarCartelLogin}
-          onHide={() => setMostrarCartelLogin(false)}
-          modoOscuro={modoOscuro}
-          onNavegar={handleNavegacionModal}
-        />
 
-        <ModalEnvio
-          show={mostrarCartelEnvio}
-          onHide={() => setMostrarCartelEnvio(false)}
-          usuario={usuario}
-          modoOscuro={modoOscuro}
-          onConfirmar={handleProcesarCompraFinal}
-          onNavegar={handleNavegacionModal}
-        />
-      </div>
+      <ModalLogin
+        show={mostrarCartelLogin}
+        onHide={() => setMostrarCartelLogin(false)}
+        onNavegar={handleNavegacionModal}
+      />
+
+      <ModalEnvio
+        show={mostrarCartelEnvio}
+        onHide={() => setMostrarCartelEnvio(false)}
+        usuario={usuario}
+        onConfirmar={handleProcesarCompraFinal}
+        onNavegar={handleNavegacionModal}
+      />
     </div>
   );
 }
