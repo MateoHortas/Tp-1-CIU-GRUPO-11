@@ -29,7 +29,6 @@
 
 .empty-cart {
   padding: 80px 20px;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -37,6 +36,12 @@
   gap: 16px;
   max-width: 550px;
   margin: 40px auto;
+}
+
+.empty-cart h2 {
+  color: #ff6b00;
+  font-weight: 800;
+  margin: 0;
 }
 
 .promo-section input {
@@ -68,6 +73,14 @@
 }
 
 /* estilos fijos */
+.section-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+
 .btn-back {
   display: inline-flex;
   align-items: center;

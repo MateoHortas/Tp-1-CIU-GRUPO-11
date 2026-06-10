@@ -106,7 +106,7 @@ function Cart() {
   return (
     <div className="cart-page py-5">
       <div className="container">
-        <h2 className="section-title text-center mt-4">TU CARRITO</h2>
+        <h2 className="section-title text-center mt-4">🛒 TU CARRITO</h2>
         <div className="orange-line mb-5"></div>
 
         {compraRealizada && (
@@ -117,7 +117,7 @@ function Cart() {
 
         {carrito.length === 0 ? (
           <div className="empty-cart">
-            <h2>🛒 Tu carrito está vacío</h2>
+            <h2>Tu carrito está vacío</h2>
             <p>Todavía no agregaste productos.</p>
 
             <Link to="/productos" className="btn-ver-productos mt-3">
