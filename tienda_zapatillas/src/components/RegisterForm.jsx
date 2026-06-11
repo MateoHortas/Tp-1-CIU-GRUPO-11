@@ -11,13 +11,13 @@ import {
   FiTruck,
   FiMessageSquare,
 } from "react-icons/fi";
-import { RiLockPasswordLine } from "react-icons/ri"; 
+import { RiLockPasswordLine } from "react-icons/ri";
 import Alert from "react-bootstrap/Alert";
 import { FcGoogle } from "react-icons/fc";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 import { Link } from "react-router-dom";
-import "../style/LoginForm.css"; 
+import "../style/LoginForm.css";
 
 function RegisterForm() {
   const [usuarios, setUsuarios] = useState([]);
@@ -50,6 +50,7 @@ function RegisterForm() {
     const targetName = e.target.name;
     const targetValue =
       e.target.type === "checkbox" ? e.target.checked : e.target.value;
+
     setForm({
       ...form,
       [targetName]: targetValue,
@@ -265,7 +266,7 @@ function RegisterForm() {
             </Form.Group>
 
             {/* Dirección y Localidad  */}
-            
+
             <Form.Group className="mb-3" controlId="registerAddress">
               <Form.Label className="fw-semibold text-secondary small">
                 Dirección (Calle y Altura)
@@ -313,7 +314,7 @@ function RegisterForm() {
                 </Form.Control.Feedback>
               </InputGroup>
             </Form.Group>
-          
+
             {/* Método de Entrega */}
             <Form.Group className="mb-3" controlId="registerDelivery">
               <Form.Label className="fw-semibold text-secondary small">
@@ -460,11 +461,10 @@ function RegisterForm() {
           <div className="position-relative text-center my-4">
             <hr className="text-muted" />
             <span className="position-absolute top-50 start-50 translate-middle bg-white px-3 text-muted fw-semibold login-divider-text">
-               REGISTRATE CON
+              REGISTRATE CON
             </span>
           </div>
 
-         
           <Row className="g-3 mb-4">
             <Col xs={12}>
               <Button

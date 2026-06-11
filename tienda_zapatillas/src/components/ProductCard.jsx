@@ -7,7 +7,6 @@ import { LoginContext } from "../context/LoginContext";
 
 import { useNavigate } from "react-router-dom";
 
-
 import "../style/ProductCard.css";
 
 function ProductCard({ producto, agregarAlCarrito }) {
@@ -16,34 +15,30 @@ function ProductCard({ producto, agregarAlCarrito }) {
 
   const navigate = useNavigate();
 
-  const {
-    agregarAFavoritos,
-    eliminarFavorito,
-    esFavorito,
-  } = useContext(FavoritosContext);
+  const { agregarAFavoritos, eliminarFavorito, esFavorito } =
+    useContext(FavoritosContext);
 
   const handleFavorito = () => {
-      if (!usuario) {
-        alert("Debes iniciar sesion para añadir a favoritos")
-        setTimeout(() => {
-          navigate("/login");
-        }, 1000);
+    if (!usuario) {
+      alert("Debes iniciar sesion para añadir a favoritos");
+      setTimeout(() => {
+        navigate("/login");
+      }, 1000);
 
-        return;
-      }
+      return;
+    }
 
-      if (esFavorito(producto.id)) {
-        eliminarFavorito(producto.id);
-      } else {
-        agregarAFavoritos(producto);
-    };
-  }
+    if (esFavorito(producto.id)) {
+      eliminarFavorito(producto.id);
+    } else {
+      agregarAFavoritos(producto);
+    }
+  };
 
   // Forzar que empiece con '/' para evitar errores de rutas relativas
   const srcImagen = imagen.startsWith("/") ? imagen : `/${imagen}`;
 
   return (
-
     <div
       className="product-card"
       style={{
@@ -84,11 +79,7 @@ function ProductCard({ producto, agregarAlCarrito }) {
             zIndex: 3,
           }}
         >
-          {esFavorito(producto.id) ? (
-            <FaHeart color="red" />
-          ) : (
-            <FiHeart />
-          )}
+          {esFavorito(producto.id) ? <FaHeart color="red" /> : <FiHeart />}
         </button>
         <img
           src={srcImagen}
@@ -204,6 +195,7 @@ function ProductCard({ producto, agregarAlCarrito }) {
               className="btn btn-outline-light btn-sm"
               style={{
                 flex: 1,
+                color: "#ffffff",
                 fontWeight: "500",
                 textDecoration: "none",
                 textAlign: "center",

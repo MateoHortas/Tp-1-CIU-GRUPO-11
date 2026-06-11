@@ -13,7 +13,7 @@ const AboutUS = () => {
   const { modoOscuro } = useContext(TemaContext);
 
   return (
-    <div
+    <div // Estás usando clases explícitas de Bootstrap
       className={`nosotros-page min-vh-100 ${modoOscuro ? "bg-dark text-white" : "bg-light text-dark"}`}
     >
       <Hero
