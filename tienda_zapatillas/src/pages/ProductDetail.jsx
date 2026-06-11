@@ -2,6 +2,11 @@ import { useState, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 import { productos } from "../data/data";
 import { CarritoContext } from "../context/CarritoContext";
+import { FiHeart } from "react-icons/fi";
+import { FaHeart } from "react-icons/fa";
+import { FavoritosContext } from "../context/FavoritosContext";
+import { LoginContext } from "../context/LoginContext";
+import { useNavigate } from "react-router-dom";
 
 function ProductDetail() {
   const { id } = useParams();
@@ -9,6 +14,10 @@ function ProductDetail() {
   const [talleSeleccionado, setTalleSeleccionado] = useState(null);
   const [stock, setStock] = useState(producto?.stock || 0);
   const { agregarAlCarrito } = useContext(CarritoContext);
+  const { usuario } = useContext(LoginContext);
+  const { agregarAFavoritos, eliminarFavorito, esFavorito } =
+  useContext(FavoritosContext);
+  const navigate = useNavigate();
 
   const agregarProductoDetalle = () => {
     if (stock > 0) {
@@ -17,6 +26,24 @@ function ProductDetail() {
         ...producto,
         talleElegido: talleSeleccionado,
       });
+    }
+  };
+
+  const handleFavorito = () => {
+    if (!usuario) {
+      alert("Debes iniciar sesión para añadir a favoritos");
+
+      setTimeout(() => {
+        navigate("/login");
+      }, 1000);
+
+      return;
+    }
+
+    if (esFavorito(producto.id)) {
+      eliminarFavorito(producto.id);
+    } else {
+      agregarAFavoritos(producto);
     }
   };
 
@@ -151,6 +178,45 @@ function ProductDetail() {
             >
               ${precio.toLocaleString("es-AR")}
             </div>
+
+            <button
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = "#ff6600";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = esFavorito(producto.id) ? "#ff6600" : "transparent";
+                e.currentTarget.style.transform = "translateY(0)";
+              }}
+              onClick={handleFavorito}
+              style={{
+                background: esFavorito(producto.id)
+                  ? "#ff6600"
+                  : "transparent",
+                color: "#fff",
+                border: "2px solid #ff6600",
+                padding: "12px 20px",
+                borderRadius: "10px",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                fontWeight: "600",
+                marginBottom: "25px",
+                width: "fit-content",
+              }}
+            >
+              {esFavorito(producto.id) ? (
+                <>
+                  <FaHeart />
+                  Quitar de favoritos
+                </>
+              ) : (
+                <>
+                  <FiHeart />
+                  Agregar a favoritos
+                </>
+              )}
+            </button>
 
             <div style={{ marginBottom: "30px" }}>
               <h4

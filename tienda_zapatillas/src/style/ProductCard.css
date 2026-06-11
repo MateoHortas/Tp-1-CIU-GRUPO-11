@@ -79,6 +79,10 @@
   transform:scale(1.05);
 }
 
+.btn-detalle:hover {
+  color: #000 !important;
+}
+
 @media (max-width:576px){
 
   .product-card img{

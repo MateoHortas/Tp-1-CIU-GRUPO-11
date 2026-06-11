@@ -192,7 +192,7 @@ function ProductCard({ producto, agregarAlCarrito }) {
           <div style={{ display: "flex", gap: "10px" }}>
             <Link
               to={`/producto/${producto.id}`}
-              className="btn btn-outline-light btn-sm"
+              className="btn btn-outline-light btn-sm btn-detalle"
               style={{
                 flex: 1,
                 color: "#ffffff",
