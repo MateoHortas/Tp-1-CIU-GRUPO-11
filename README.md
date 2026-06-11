@@ -100,13 +100,6 @@ http://localhost:5173
 
 ---
 
-## 🌐 Deploy
-
-Proyecto desplegado en:
-
-**[Agregar URL del deploy aquí]**
-
----
 
 ## 📚 Trabajo Práctico
 
