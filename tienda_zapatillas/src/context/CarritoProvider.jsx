@@ -1,8 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CarritoContext } from "./CarritoContext";
 
 export function CarritoProvider({ children }) {
-  const [carrito, setCarrito] = useState([]);
+  const [carrito, setCarrito] = useState(() => {
+  const carritoGuardado = localStorage.getItem("carrito");
+
+    return carritoGuardado
+      ? JSON.parse(carritoGuardado)
+      : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem(
+      "carrito",
+      JSON.stringify(carrito)
+    );
+  }, [carrito]);
   const [compraRealizada, setCompraRealizada] = useState(false);
 
   
@@ -56,6 +69,7 @@ export function CarritoProvider({ children }) {
   const confirmarCompra = () => {
     setCompraRealizada(true);
     setCarrito([]);
+    localStorage.removeItem("carrito");
   };
 
   return (
