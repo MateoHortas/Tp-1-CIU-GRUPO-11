@@ -15,7 +15,6 @@ El proyecto fue realizado como trabajo práctico para la materia Construcción d
 - React Bootstrap
 - Bootstrap Icons
 - Context API
-- LocalStorage
 - CSS3
 - Vite
 
