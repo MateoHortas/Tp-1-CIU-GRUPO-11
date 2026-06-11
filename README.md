@@ -16,6 +16,7 @@ El proyecto fue realizado como trabajo práctico para la materia Construcción d
 - Bootstrap Icons
 - Context API
 - CSS3
+- localStorage
 - Vite
 
 ## ⚙️ Instalación y Ejecución
