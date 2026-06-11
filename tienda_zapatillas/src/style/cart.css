@@ -7,7 +7,7 @@
     color 0.3s ease;
 }
 
-/* fuerza herencia para evitar Bootstrap rompiendo colores */
+/* fuerza herencia para evitar que Bootstrap rompa los colores */
 .cart-page * {
   color: inherit;
 }

@@ -5,9 +5,9 @@
 }
 
 .btn-login-main:hover {
-  background-color: #ffb74d; /* Naranja suave/pastel */
+  background-color: #ffb74d; 
   border-color: #ffb74d;
-  color: white; /* Asegura que el texto siga siendo blanco */
+  color: white; 
 }
 
 

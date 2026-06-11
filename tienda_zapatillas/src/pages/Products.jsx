@@ -14,7 +14,7 @@ function Products() {
   const [talleSeleccionado, setTalleSeleccionado] = useState("Todos");
   const [precioMaximo, setPrecioMaximo] = useState(300000);
 
-  // Estado para detectar si es pantalla de PC (ancho mayor a 991px de Bootstrap)
+  // Estado para detectar si la pantalla de la PC (ancho mayor a 991px de Bootstrap)
   const [esPantallaGrande, setEsPantallaGrande] = useState(window.innerWidth > 991);
 
   useEffect(() => {

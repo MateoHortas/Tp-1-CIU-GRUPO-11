@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Card } from "react-bootstrap";
 import { TemaContext } from "../context/TemaContext";
-import "../style/InfoCard.css"; // Estilos específicos para la tarjeta
+import "../style/InfoCard.css"; 
 
 function InfoCard({ titulo, descripcion }) {
   const { modoOscuro } = useContext(TemaContext);
@@ -20,7 +20,7 @@ function InfoCard({ titulo, descripcion }) {
           {titulo}
         </Card.Title>
 
-        {/* Línea divisoria decorativa sutil (estilo maqueta) */}
+        
         <div className="divider-line mb-3"></div>
 
         {/* Descripción / Contenido */}

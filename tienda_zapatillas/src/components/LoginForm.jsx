@@ -121,7 +121,7 @@ function LoginForm() {
     localStorage.setItem("usuarios", JSON.stringify(usuariosActualizados));
     setUsuarios(usuariosActualizados);
 
-    // Impactamos el Contexto Global de Autenticación
+    
     login({
       ...usuarioEncontrado, // <-- Manda todos los campos del perfil actual
       nombre: usuarioEncontrado.nombre || usuarioEncontrado.email.split("@")[0],

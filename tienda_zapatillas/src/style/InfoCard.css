@@ -1,23 +1,23 @@
-/* Transición suave para cuando cambia de modo claro a oscuro o hace hover */
+
 .info-card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Efecto hover elegante */
+
 .info-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08) !important;
 }
 
-/* Línea decorativa sutil debajo del título */
+
 .divider-line {
   width: 40px;
   height: 3px;
-  background-color: #ff6a00; /* Tu naranja corporativo */
+  background-color: #ff6a00; 
   border-radius: 2px;
 }
 
-/* Forzar centrado de la línea si la pantalla es chica y el texto se centra */
+
 @media (max-width: 768px) {
   .divider-line {
     margin: 0 auto 1rem auto;
