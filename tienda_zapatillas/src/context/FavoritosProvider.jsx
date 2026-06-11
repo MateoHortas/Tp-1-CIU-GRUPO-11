@@ -1,8 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FavoritosContext } from "./FavoritosContext";
 
 export function FavoritosProvider({ children }) {
-  const [favoritos, setFavoritos] = useState([]);
+  const [favoritos, setFavoritos] = useState(() => {
+    const favoritosGuardados = localStorage.getItem("favoritos");
+
+    return favoritosGuardados ? JSON.parse(favoritosGuardados) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("favoritos", JSON.stringify(favoritos));
+  })
 
   const agregarAFavoritos = (producto) => {
     const existe = favoritos.some((item) => item.id === producto.id);
